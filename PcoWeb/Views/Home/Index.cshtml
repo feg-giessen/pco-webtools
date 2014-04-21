@@ -1,0 +1,65 @@
+﻿@using PcoWeb.Controllers
+@{
+    ViewBag.Title = "Startseite";
+}
+
+@if (HomeController.Organization == null)
+{
+<p>
+    Willkommen auf der <em>Planning Center Online</em> Dienstplanungs-Platform.
+</p>
+}
+else
+{
+    <p>
+        Willkommen auf der <em>Planning Center Online</em> Dienstplanungs-Platform von @HomeController.Organization.name.
+    </p>
+    <iframe id="ministry_positions" style="visibility: hidden;" src="https://planningcenteronline.com/ministry_positions.json?name=&with_categories=1&in_ministry_path=&excluded_position_ids=&excluded_category_ids="></iframe>
+}
+@section scripts
+{
+    @if (HomeController.Organization != null)
+    {
+        <script type="text/javascript">
+            $(function () {
+
+                try {
+                    $.ajax({
+                        type: 'GET',
+                        data: {  },
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        url: 'https://planningcenteronline.com/ministry_positions.json?name=&with_categories=1&in_ministry_path=&excluded_position_ids=&excluded_category_ids=',
+                        done: function (data) {
+                            $.ajax({
+                                type: 'POST',
+                                data: { jsdata: data },
+                                url: '@Url.Action("PostMinistryPositions", "Home")',
+                                done: function (d) {
+
+                                }
+                            });
+                        }
+                    });
+                } catch(e) {
+    
+                }
+                try {
+                    $.ajax({
+                        type: 'POST',
+                        data: { jsdata: $('#ministry_positions').contents() },
+                        url: '@Url.Action("PostMinistryPositions", "Home")',
+                        done: function (data) {
+
+                        }
+                    });
+                } catch(e) {
+
+                } 
+                
+            });
+        </script>
+    }
+}
+

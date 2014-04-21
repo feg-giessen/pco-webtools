@@ -1,0 +1,21 @@
+﻿@using System.Globalization
+@using PcoWeb
+@model PcoWeb.Controllers.VeranstaltungenController.ServiceTypeModel
+
+@{
+    ViewBag.Title = Model.ServiceType.name;
+    var cultureInfo = CultureInfo.GetCultureInfo("de-DE");
+}
+<h1>@ViewBag.Title</h1>
+@Html.ActionLink("Übersicht", "Index")
+
+<ul>
+    @foreach (var item in Model.Plans)
+    {
+        var date = ViewHelpers.FormtatedDate(item.dates);
+        if (date.HasValue)
+        {
+            <li>@Html.ActionLink(date.Value.ToString("dd. MMMM yyyy", cultureInfo), "Live", new { id = item.id })</li>
+        }
+    }
+</ul>

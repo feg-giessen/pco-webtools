@@ -1,0 +1,67 @@
+﻿@using System.Globalization
+@using PcoWeb
+@model PcoWeb.Controllers.VeranstaltungenController.PlanModel
+
+@{
+    ViewBag.Title = ViewHelpers.FormtatedDate(Model.Plan.dates).ToString("dd. MMMM yyyy", CultureInfo.GetCultureInfo("de-DE"));
+}
+
+@Html.ActionLink(Model.Plan.service_type_name + "-Übersicht", "Index", new { id = Model.Plan.service_type_id })
+<div>
+    @Html.ActionLink("<<", "Plan", new { id = Model.Plan.prev_plan_id })
+    @Html.ActionLink(">>", "Plan", new { id = Model.Plan.next_plan_id })
+</div>
+<h3>@Model.Plan.plan_title @(Model.Plan.series == null ? string.Empty : "(" + Model.Plan.series_title + ")") @Html.ActionLink("[LIVE]", "Live", new { id = Model.Plan.id })</h3>
+<a href="https://www.planningcenteronline.com/plans/@Model.Plan.id" title="In Planning Center Online öffnen">[PCO]@*<img href="://www.planningcenteronline.com/favicon.ico"/>*@</a>
+
+<style type="text/css">
+    table td, table th { vertical-align: top; padding: 2px 4px; }
+    table th { font-weight: bold;}
+    table tr.category { margin-top: 10px; }
+    table .category th { background: #aaaaaa;}
+    table .position th { background: #dddddd; }
+
+    .status-C { color: green; }
+    .status-D { color: red; font-style: italic;}
+    .status-U { color: orange; font-style: italic; }
+</style>
+
+<table class="dienstplan">
+    <colgroup>
+        <col width="300"/>
+        <col width="auto"/>
+        <col width="auto"/>
+    </colgroup>
+    @foreach (var category in Model.Categories.OrderBy(x => x.sequence))
+    {
+        <tr class="category"><th colspan="3">@category.name</th></tr>
+        foreach (var position in category.positions)
+        {
+            var people = Model.Plan.plan_people.Where(pp => pp.category_id == category.id && pp.position == position.name).ToList();
+            
+            <tr class="position"><th rowspan="@(people.Count > 1 ? (int?)people.Count : null)">@position.name</th>
+                @if (people.Any())
+                {
+                    var person = people.First();
+                
+                    <td class="status-@person.status">@person.person_name</td><td class="status-@person.status"><img src="@(person.person_photo_thumbnail)"/></td>
+                }
+                else
+                {
+                    <td colspan="2"></td>
+                }
+            </tr>
+        
+            if (people.Count > 1)
+            {
+                foreach (var person in people.Skip(1))
+                {
+                    <tr>
+                        <td class="status-@person.status">@person.person_name</td>
+                        <td class="status-@person.status"><img src="@person.person_photo_thumbnail"/></td>
+                    </tr>
+                }
+            }
+        }
+    }
+</table>

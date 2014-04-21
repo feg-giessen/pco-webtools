@@ -1,0 +1,380 @@
+﻿@small-font: 0.9em;
+
+@header-bg: #ddd;
+@song-bg: #c6e2a3;
+@band-bg: #d8ecbf;
+
+.plan-info {
+    background: none repeat scroll 0 0 #fafaf9;
+    border: 1px solid #C5C5C1;
+    border-bottom: none;
+    border-radius: 3px 3px 0 0;
+    max-width: 1000px;
+    padding: 6px 10px;
+    clear: both;
+
+    h3, h4 {
+        margin: 0;
+        margin-bottom: 4px;
+    }
+
+    h3 {
+        border-bottom: 1px solid #EDEDEE;
+        padding-bottom: 6px;
+    }
+
+    .time {
+        margin-top: 6px;
+    }
+}
+
+.plan-nav {
+    margin-bottom: 10px;
+    height: 32px;
+
+    .previous, .next {
+        float: left;
+        height: 16px;
+        line-height: 16px;
+        width: 10px;
+        color: #505050;
+        display: inline-block;
+        font-size: 11px;
+        overflow: hidden;
+        padding: 0 8px 0 5px;
+        text-transform: lowercase;
+        background: #f3f3f3;
+        background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fafafa), color-stop(100%, #f3f3f3));
+        background-image: -webkit-linear-gradient(top, #fafafa, #f3f3f3);
+        background-image: -moz-linear-gradient(top, #fafafa, #f3f3f3);
+        background-image: -o-linear-gradient(top, #fafafa, #f3f3f3);
+        background-image: linear-gradient(top, #fafafa,#f3f3f3);
+        -moz-background-clip: padding-box;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #CDCDCD;
+        border-radius: 3px;
+        cursor: pointer;
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+
+        :before,
+        :after {
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+        }
+    }
+
+    .icon {
+        background: url('pco_sprite.png') no-repeat scroll 0 -91px rgba(0, 0, 0, 0);
+        height: 9px;
+        left: 2px;
+        top: 4px;
+        width: 9px;
+        display: block;
+        float: left;
+        margin-right: 4px;
+        border: 0 none;
+        outline: medium none;
+        overflow: hidden;
+        position: relative;
+        text-indent: -9999em;
+    }
+
+    .previous {
+        border-radius: 3px 0 0 3px;
+        margin: 8px 0 0 0;
+    }
+
+    .next {
+        border-radius: 0 3px 3px 0;
+        margin: 8px 0 0 -1px;
+
+        .icon {
+            background-position: -11px -91px;
+            left: 3px;
+        }
+    }
+}
+
+.plan-nav:after {
+    content: '';
+    clear: both;
+}
+
+table.live {
+    width: 100%;
+    max-width: 1000px;
+    font-size: 12px;
+    border: 1px solid #EBEBEB;
+
+    thead tr {
+        height: 32px;
+    }
+
+    th {
+        background-color: #aaa;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    td {
+        font-size: 0.9em;
+        padding: 4px 5px;
+        vertical-align: top;
+        border-bottom: 1px solid #EBEBEB;
+    }
+
+    tr:nth-child(2n), tr.odd {
+        background: none repeat scroll 0 0 #FDFDFD;
+    }
+
+    thead th {
+        -moz-border-bottom-colors: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        background: none repeat scroll 0 0 #EBEBE9;
+        border-color: #CFCFCF;
+        -moz-border-image: none;
+        -o-border-image: none;
+        -webkit-border-image: none;
+        border-image: none;
+        border-style: solid;
+        border-width: 1px;
+        color: #646464;
+        font-size: 10px !important;
+        line-height: 1.1em;
+        padding: 0 5px;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .time {
+        text-align: right;
+    }
+
+    .timepoint {
+        display: block;
+        font-weight: bold;
+    }
+
+    .length {
+        font-size: @small-font;
+    }
+
+    .title {
+        font-weight: bold;
+        line-height: 16px;
+    }
+
+    .description, .detail {
+        font-size: @small-font;
+        font-style: italic;
+    }
+
+    tr.type-Header {
+        background: none repeat scroll 0 0 #AFAFAF;
+        color: #FFFFFF;
+        -webkit-text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+
+        td {
+            border-bottom: 1px solid #939393;
+            padding-left: 10px;
+            font-weight: bold;
+        }
+    }
+
+    tr.akteur-band td {
+        background-color: @band-bg;
+    }
+
+    tr.type-Song td {
+        background-color: @song-bg;
+    }
+
+    .sequence {
+        width: 80px;
+        float: left;
+        clear: left;
+
+        div {
+            width: 70px;
+            border-radius: 3px 3px 3px 3px;
+            padding: 2px 4px 2px;
+            margin-bottom: 2px;
+            /*font-size: @small-font;*/
+            overflow: hidden;
+        }
+    }
+
+    .sequence-v,
+    .sequence-v1 {
+        background-color: #add8e6;
+    }
+
+    .sequence-v2 {
+        background-color: #adc8e6;
+    }
+
+    .sequence-v3 {
+        background-color: #adb8e6;
+    }
+
+    .sequence-v4 {
+        background-color: #ada8e6;
+    }
+
+    .sequence-v5 {
+        background-color: #ad98e6;
+    }
+
+    .sequence-v6 {
+        background-color: #ad88e6;
+    }
+
+    .sequence-v7 {
+        background-color: #ad78e6;
+    }
+
+    .sequence-v8 {
+        background-color: #ad68e6;
+    }
+
+    .sequence-c,
+    .sequence-c1 {
+        background-color: #fdff0a;
+    }
+
+    .sequence-c2 {
+        background-color: #fcb200;
+    }
+
+    .sequence-pc {
+        background-color: #ff732c;
+    }
+
+    .sequence-b {
+        background-color: #b5ff3a;
+    }
+
+    .sequence-inst,
+    .sequence-intro,
+    .sequence-outro {
+        background-color: #018700;
+    }
+
+    .type-Song {
+        .title {
+            margin-bottom: 5px;
+        }
+
+        .description, .detail {
+            margin-top: -4px;
+            margin-bottom: 5px;
+        }
+
+        .text {
+            margin-left: 100px;
+            clear: right;
+
+            .part {
+                background-color: rgba(237, 237, 237, .8);
+                margin-bottom: 7px;
+                border-radius: 3px 3px 3px 3px;
+            }
+
+            .seq-label {
+                border-radius: 3px 3px 3px 3px;
+                padding: 2px 4px 2px;
+            }
+
+            .content {
+                padding: 3px 5px 5px;
+            }
+
+            ::after {
+                content: '';
+                clear: both;
+            }
+        }
+    }
+
+    .action {
+        width: 16px;
+        height: 16px;
+        margin-left: 10px;
+        display: inline-block;
+        cursor: pointer;
+        margin-bottom: -5px;
+        top: 2px;
+    }
+
+    .song-toggle {
+        background: url('pco_sprite.png') -42px -130px no-repeat;
+    }
+}
+
+.plan-clock {
+    .current-clock, .to-service-clock, .in-service-clock {
+        text-align: center;
+    }
+
+    .current-clock {
+        font-weight: 700;
+        font-size: 18px;
+        padding: 7px 0;
+    }
+
+    .current-clock.live {
+        background-color: #d34f35;
+        color: #fff;
+    }
+}
+
+.live-tag {
+    width: 20px;
+    position: absolute;
+    left: 20px;
+    border-radius: 8px 0 0 8px;
+    background-color: #d34f35;
+
+    span {
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+        color: #fff;
+        font-size: 10px;
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+}
+
+.offset-tag {
+    width: 20px;
+    position: absolute;
+    left: 20px;
+    border-radius: 8px 0 0 8px;
+    background-color: #cccccc;
+
+    span {
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+        color: #000;
+        font-size: 10px;
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+}

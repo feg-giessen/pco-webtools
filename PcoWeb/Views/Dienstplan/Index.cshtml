@@ -1,0 +1,168 @@
+﻿@using System.Globalization
+@using PcoWeb.Models
+@using PcoWeb
+@model DienstplanMatrixModel
+@{
+    ViewBag.Title = "Dienstpläne";
+}
+@helper Persons(string names)
+{
+    @MvcHtmlString.Create(string.Join(", ", names.Split(new[] { ", " }, StringSplitOptions.None).Select(HttpUtility.HtmlEncode).Select(n => n.Replace(" ", "&nbsp;"))))
+}
+
+<style>
+    table.dienst-matrix {
+        border: 1px solid black;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        border-spacing: 0;
+        border-collapse: collapse;
+    }
+
+        table.dienst-matrix th, table.dienst-matrix td {
+            border: 1px solid black;
+            padding: 1px 2px;
+        }
+
+        table.dienst-matrix th {
+            background: #dddddd;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        table.dienst-matrix td {
+            text-align: left;
+            vertical-align: top;
+        }
+
+    .person {
+        min-width: 110px;
+    }
+
+    .we {
+    }
+
+    .nwe {
+        background-color: #eeeeee;
+    }
+
+    .st-308904 {
+        background-color: @ViewHelpers.ColorMorgen.ToCssColor();
+        color: black;
+    }
+
+    .st-200602 {
+        background-color: @ViewHelpers.ColorAbend.ToCssColor();
+        color: black;
+    }
+
+    .st-312434 {
+        background-color: @ViewHelpers.ColorBesondere.ToCssColor();
+        color: black;
+    }
+</style>
+
+@if (ViewBag.Links ?? false)
+{
+    using (Html.BeginForm("Index", "Dienstplan", FormMethod.Post))
+    {
+        foreach (var item in Model.ServiceTypes.Where(t => t != "false"))
+        {
+            <input type="hidden" name="ServiceTypes" value="@item" />
+        }
+        @Html.Hidden("Start", Model.Start)
+        @Html.Hidden("Ende", Model.Ende)
+
+        <input type="submit" value="Excel" class="k-button" name="type" />
+        <input type="submit" value="PDF" class="k-button" name="type" />
+        <input type="submit" value="PDF (A3)" class="k-button" name="type" />
+    }
+}
+<div style="">
+    @*width:100%; overflow-x:auto;*@
+<table class="dienst-matrix">
+    <thead>
+        <tr><th>Tag</th><th>Datum</th><th>Uhrzeit</th><th>Anlass</th><th class="person">Planung</th><th class="person">Moderation</th><th class="person">Ltg. Abendmahl</th><th class="person">Verkündigung</th><th>Thema/Text</th><th class="person">Ltg. Musik</th><th class="person">Ton</th><th class="person">Präsentation</th><th class="person">Licht</th><th>Bes. Elemente</th><th>Bemerkungen</th><th>Kollekte</th><th>CD/WWW</th><th>Bistro</th><th>Deko</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var plan in Model.Items)
+        {
+            <tr class="st-@plan.Item.service_type_id @(plan.Date.DayOfWeek == DayOfWeek.Sunday ? "we" : "nwe")">
+                <td>@plan.Date.ToString("ddd", CultureInfo.CurrentCulture)</td>
+                <td>@plan.Date.ToShortDateString()</td>
+                <td>@plan.Date.ToShortTimeString()</td>
+                <td>@plan.Anlass</td>
+                <td>@Persons(plan.Gottesdienstplanung)</td>
+                <td>@Persons(plan.Hauptmoderation)</td>
+                <td>@Persons(plan.Abendmahl)</td>
+                <td>@plan.Verkuendigung</td>
+                <td>@plan.Thema</td>
+                <td>@Persons(plan.Musik)</td>
+                <td>@Persons(plan.Ton)</td>
+                <td>@Persons(plan.Praesentation)</td>
+                <td>@Persons(plan.Licht)</td>
+                <td>@plan.BesElemente</td>
+                <td>@plan.Bemerkung</td>
+                <td>@plan.Kollekte</td>
+                <td>@plan.Aufnahme</td>
+                <td>@plan.Bistro</td>
+                <td>@plan.Deko</td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+@if (ViewBag.Links ?? false)
+{
+    <div style="margin-top:10px;">
+        <a href="@ViewBag.permalink">Permalink</a>: <span class="perma">@ViewBag.permalink</span>
+    </div>
+}
+@section scripts
+{
+    <script>
+        $(function () {
+            $('.perma').on('dblclick', function () {
+                $('.perma').innerText.select();
+            });
+        })
+    </script>
+}
+@section sidebar
+{
+    <style>
+        ul label {
+            width: 120px;
+            display: inline-block;
+            font-weight: normal;
+        }
+
+        .k-select .k-icon {
+            margin-top: 8px;
+        }
+    </style>
+    @using (Html.BeginForm("Index", "Dienstplan", FormMethod.Post))
+    {
+        <h3>Veranstaltungen</h3>
+        <ul>
+            @foreach (var item in this.Model.ServiceTypeList)
+            {
+                <li><input type="checkbox" name="ServiceTypes" checked="@(Model.ServiceTypes.Any(t => t == item.id.ToString()) ? "checked" : null)"  id="service_type_@item.id" value="@item.id" /> @Html.Label("service_type_" + item.id, item.name)</li>
+            }
+        </ul>
+
+        <h3>Datum</h3>
+        <ul>
+            <li style="margin-bottom: 5px;">
+                @Html.LabelFor(m => m.Start)
+                @Html.EditorFor(m => m.Start)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Ende)
+                @Html.EditorFor(m => m.Ende)
+            </li>
+        </ul>
+
+        <input type="submit" value="Generieren" class="k-button" />
+    }
+}

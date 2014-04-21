@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcoWeb", "PcoWeb\PcoWeb.csproj", "{ACA27D8A-BE68-4FF9-B409-17C01C199729}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcoBase", "PcoBase\PcoBase.csproj", "{0DAC365A-C288-499E-AADE-4820AC5602E0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACA27D8A-BE68-4FF9-B409-17C01C199729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACA27D8A-BE68-4FF9-B409-17C01C199729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACA27D8A-BE68-4FF9-B409-17C01C199729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACA27D8A-BE68-4FF9-B409-17C01C199729}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DAC365A-C288-499E-AADE-4820AC5602E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DAC365A-C288-499E-AADE-4820AC5602E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DAC365A-C288-499E-AADE-4820AC5602E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DAC365A-C288-499E-AADE-4820AC5602E0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

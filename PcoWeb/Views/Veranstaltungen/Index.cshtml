@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Veranstaltungen";
+}
+
+@model IEnumerable<PcoBase.ServiceType>
+<h1>@ViewBag.Title</h1>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>@Html.ActionLink(item.name, "Index", new { id = item.id })</li>
+    }
+</ul>

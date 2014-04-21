@@ -1,0 +1,6 @@
+﻿@model System.DateTime?
+@{
+    string id = ViewData.TemplateInfo.GetFullHtmlFieldId("");             
+}
+@Html.TextBox(string.Empty, (Model.HasValue ? Model.Value.ToShortDateString() : ""), new { type = "date" })
+<script>$(document).ready(function() {$("#@id").kendoDatePicker();})</script>
