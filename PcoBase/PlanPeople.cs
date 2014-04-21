@@ -13,7 +13,7 @@
         public string person_photo_thumbnail { get; set; }
         public int person_id { get; set; }
         public string person_name { get; set; }
-        public int responds_to_id { get; set; }
+        public int? responds_to_id { get; set; }
         public string excluded_times { get; set; }
         public string notes { get; set; }
     }

@@ -514,7 +514,6 @@
     <Content Include="Views\Veranstaltungen\Plans.cshtml" />
     <Content Include="Views\Veranstaltungen\Plan.cshtml" />
     <Content Include="Views\Dienstplan\Index.cshtml" />
-    <Content Include="Views\Dienstplan\Matrix.cshtml" />
     <Content Include="Scripts\kendo\2013.3.1119\kendo.window.min.js.map" />
     <Content Include="Scripts\kendo\2013.3.1119\kendo.web.min.js.map" />
     <Content Include="Scripts\kendo\2013.3.1119\kendo.view.min.js.map" />
