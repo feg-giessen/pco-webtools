@@ -50,7 +50,7 @@ namespace PcoWeb.Export
                         case 312434:
                         default:
                             // Sonstige
-                            sheet.Cells[row, 4].Value = string.Format("{0} / {1}", plan.Gottesdienstplanung, plan.Verkuendigung);
+                            sheet.Cells[row, 4].Value = string.Format("{0} / {1}", plan.Hauptmoderation, plan.Verkuendigung);
                             break;
                     }
 
