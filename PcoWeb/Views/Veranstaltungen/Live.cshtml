@@ -40,58 +40,58 @@
     case PlanItemType.Song:
     case PlanItemType.Normal:
     default:
-    <td>@item.Item.sequence</td>
-    <td class="time"><span class="timepoint">@(item.TimePoint.HasValue ? item.TimePointLocal.Value.ToShortTimeString() : string.Empty)</span><span class="length">@(((item.Time == null && !item.TimePoint.HasValue) || (item.Time != null && item.Time.exclude)) ? string.Empty : item.Item.length_formatted)</span></td>
-<td>
-    <div class="title">
-        <span class="inner-title">@item.Item.title</span>
-        @if (item.ItemType == PlanItemType.Song && item.Arrangement != null && item.Arrangement.Parts.Any())
-        {
-            <span class="action song-toggle"></span>
-        }
-    </div>
-    @if (!string.IsNullOrEmpty(item.Item.description))
-    {
-        <div class="description">
-            @item.Description
-        </div>
-    }
-    @if (!string.IsNullOrEmpty(item.Item.detail))
-    {
-        <div class="detail">
-            @item.Detail
-        </div>
-    }
-    @if (item.ItemType == PlanItemType.Song)
-    {
-        <div class="song-details">
-            <div class="sequence">
-                @foreach (var s in item.SongSequence)
-                {
-                    <div class="sequence-@s.Class">@s.Title</div>
-                }
-            </div>
-            @if (item.Arrangement != null)
-            {
-                <div class="text">
-                    @foreach (var part in item.Arrangement.Parts)
+            <td>@item.Item.sequence</td>
+            <td class="time"><span class="timepoint">@(item.TimePoint.HasValue ? item.TimePointLocal.Value.ToShortTimeString() : string.Empty)</span><span class="length">@(((item.Time == null && !item.TimePoint.HasValue) || (item.Time != null && item.Time.exclude)) ? string.Empty : item.Item.length_formatted)</span></td>
+            <td>
+                <div class="title">
+                    <span class="inner-title">@item.Item.title</span>
+                    @if (item.ItemType == PlanItemType.Song && item.Arrangement != null && item.Arrangement.Parts.Any())
                     {
-                        <div class="part">
-                            <div class="seq-label sequence-@part.Class">@part.Label</div>
-                            <div class="content">
-                                @part.Html
-                            </div>
-                        </div>
+                        <span class="action song-toggle"></span>
                     }
                 </div>
-            }
-        </div>
-    }
-</td>
-                <td>@item.Akteur</td>
-                    break;
-            }
-            </tr>
+                @if (!string.IsNullOrEmpty(item.Item.description))
+                {
+                    <div class="description">
+                        @item.Description
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(item.Item.detail))
+                {
+                    <div class="detail">
+                        @item.Detail
+                    </div>
+                }
+                @if (item.ItemType == PlanItemType.Song)
+                {
+                    <div class="song-details">
+                        <div class="sequence">
+                            @foreach (var s in item.SongSequence)
+                            {
+                                <div class="sequence-@s.Class">@s.Title</div>
+                            }
+                        </div>
+                        @if (item.Arrangement != null)
+                        {
+                            <div class="text">
+                                @foreach (var part in item.Arrangement.Parts)
+                                {
+                                    <div class="part">
+                                        <div class="seq-label sequence-@part.Class">@part.Label</div>
+                                        <div class="content">
+                                            @part.Html
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+            </td>
+            <td>@item.Akteur</td>
+                break;
+        }
+        </tr>
     }
     </tbody>
 </table>
