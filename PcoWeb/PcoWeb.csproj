@@ -193,6 +193,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MitarbeiterController.cs" />
     <Compile Include="Controllers\VeranstaltungenController.cs" />
+    <Compile Include="Export\ExcelTopics.cs" />
     <Compile Include="Export\ExcelMatrix.cs" />
     <Compile Include="Export\PdfMatrix.cs" />
     <Compile Include="FormUpload.cs" />

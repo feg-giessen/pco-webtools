@@ -83,6 +83,12 @@ namespace PcoWeb.Controllers
 
                     return this.File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Dienstplan_" + daterange + ".xlsx");
                 }
+                else if (type != null && type.IndexOf("Veranstaltungen", StringComparison.InvariantCultureIgnoreCase) > -1 && model.Start.HasValue && model.Ende.HasValue)
+                {
+                    var stream = ExcelTopics.Generate(planModels);
+
+                    return this.File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Veranstaltungen_" + daterange + ".xlsx");
+                }
                 else if (type != null && type.IndexOf("a3", StringComparison.InvariantCultureIgnoreCase) > -1 && model.Start.HasValue && model.Ende.HasValue)
                 {
                     var stream = PdfMatrix.Generate(org, model.Start.Value, model.Ende.Value, planModels, true);
