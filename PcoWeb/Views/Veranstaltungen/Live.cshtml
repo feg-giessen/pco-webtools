@@ -110,6 +110,13 @@
     <ul class="actions">
         <li class="song-texts"><span class="icon"></span>Texte <a class="js-show" href="#">auf</a>/<a class="js-hide" href="#">zu</a></li>
     </ul>
+    <h3>Sänger</h3>
+    <ul class="singers">
+        @foreach (SingerModel person in this.Model.Singers)
+        {
+            <li>@person.Name (@person.Shortcut)</li>
+        }
+    </ul>
 </div>
 }
 @section scripts

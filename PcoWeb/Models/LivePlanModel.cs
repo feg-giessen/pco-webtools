@@ -16,6 +16,8 @@ namespace PcoWeb.Models
             this.Item = plan;
             this.Items = plan.items.Select(i => new LivePlanItemModel(i, this.Time)).ToList();
 
+            this.People = plan.plan_people;
+
             ServiceTime time = this.Time;
             if (time != null)
             {
@@ -93,6 +95,58 @@ namespace PcoWeb.Models
         {
             get;
             private set;
+        }
+
+        public IEnumerable<PlanPeople> People { get; private set; }
+
+        public IEnumerable<SingerModel> Singers
+        {
+            get
+            {
+                return this.People
+                    .Where(p => p.position != null && p.status != "D" && p.position.IndexOf("Gesang", StringComparison.OrdinalIgnoreCase) > -1)
+                    .OrderBy(p => p.person_name)
+                    .Select(p => new SingerModel(p));
+            }
+        }
+    }
+
+    public class SingerModel
+    {
+        private readonly PlanPeople person;
+
+        public SingerModel(PlanPeople person)
+        {
+            this.person = person;
+        }
+
+        public int Id
+        {
+            get { return this.person.person_id; }
+        }
+
+        public string Name
+        {
+            get { return this.person.person_name; }
+        }
+
+        public string Shortcut
+        {
+            get 
+            { 
+                string[] nameParts = (this.person.person_name ?? string.Empty).Split(' ');
+
+                if (nameParts.Length > 1)
+                {
+                    return nameParts.First().Substring(0, 1).ToUpper()
+                        + nameParts.Last().Substring(0, 1).ToUpper();
+                }
+
+                if (nameParts[0].Length > 1)
+                    return nameParts[0].Substring(0, 2);
+
+                return nameParts[0];
+            }
         }
     }
 
