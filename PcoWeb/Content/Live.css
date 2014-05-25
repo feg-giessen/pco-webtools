@@ -243,6 +243,15 @@ table.live .type-Song .text .part {
   margin-bottom: 7px;
   border-radius: 3px 3px 3px 3px;
 }
+table.live .type-Song .text .part span {
+  display: block;
+}
+table.live .type-Song .text .part span.t {
+  padding-left: 10px;
+  font-size: 0.9em;
+  font-style: italic;
+  color: #606060;
+}
 table.live .type-Song .text .seq-label {
   border-radius: 3px 3px 3px 3px;
   padding: 2px 4px 2px;

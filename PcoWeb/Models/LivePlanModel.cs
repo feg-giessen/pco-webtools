@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+
+using IvanAkcheurov.NTextCat.Lib;
+
 using PcoBase;
 
 namespace PcoWeb.Models
@@ -460,6 +464,18 @@ namespace PcoWeb.Models
 
         public string Text { get; set; }
 
+        public IEnumerable<TextLine> Lines
+        {
+            get
+            {
+                string originalLanguage = null;
+
+                return Regex.Split(this.Text, "\r\n|\r|\n")
+                    .Where(t => !string.IsNullOrWhiteSpace(t))
+                    .Select(t => new TextLine(t, ref originalLanguage));
+            }
+        } 
+
         public IHtmlString Html
         {
             get { return Helper.Nl2br(this.Text); }
@@ -477,6 +493,35 @@ namespace PcoWeb.Models
             }
 
             this.Text += text;
+        }
+
+        public class TextLine
+        {
+            private static readonly RankedLanguageIdentifierFactory Factory = new RankedLanguageIdentifierFactory();
+            
+            private static readonly RankedLanguageIdentifier Identifier = Factory.Load(
+                Path.Combine(AppDomain.CurrentDomain.RelativeSearchPath, "Core14.profile.xml"));
+
+            public TextLine(string line, ref string originalLanguage)
+            {
+                this.Language = Identifier.Identify(line)
+                    .First(x => x.Item1.Iso639_3 == "eng" || x.Item1.Iso639_3 == "deu")
+                    .Item1.Iso639_3;
+
+                if (originalLanguage == null)
+                {
+                    originalLanguage = this.Language;
+                }
+
+                this.Text = line;
+                this.Translation = originalLanguage != this.Language && originalLanguage != "deu";
+            }
+
+            public string Language { get; private set; }
+
+            public string Text { get; private set; }
+
+            public bool Translation { get; private set; }
         }
     }
 }
