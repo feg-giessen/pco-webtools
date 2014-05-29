@@ -2,6 +2,6 @@
 {
     public class PlanPosition
     {
-        public string name;
+        public string name { get; set; }
     }
 }

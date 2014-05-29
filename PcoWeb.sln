@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcoWeb", "PcoWeb\PcoWeb.csproj", "{ACA27D8A-BE68-4FF9-B409-17C01C199729}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcoBase", "PcoBase\PcoBase.csproj", "{0DAC365A-C288-499E-AADE-4820AC5602E0}"
