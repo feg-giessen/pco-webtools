@@ -87,14 +87,14 @@ namespace PcoWeb
 
                     var extraData = new Dictionary<string, string>
                         {
-                            { "email", person.contact_data.email_addresses.First().address },
+                            { "email", person.ContactData.EmailAddresses.First().Address },
                         };
 
                     return new AuthenticationResult(
                         isSuccessful: true, 
                         provider: this.ProviderName, 
-                        providerUserId: person.id.ToString(), 
-                        userName: person.name, 
+                        providerUserId: person.Id.ToString(), 
+                        userName: person.Name, 
                         extraData: extraData);
                 }
             }

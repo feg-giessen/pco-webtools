@@ -19,7 +19,7 @@ namespace PcoWeb.Models
                 throw new ArgumentNullException("plan");
 
             this.plan = plan;
-            this.Date = DateTime.Parse(plan.service_times.First(t => t.time_type == "Service").starts_at_unformatted.Replace(" +0000", string.Empty));
+            this.Date = DateTime.Parse(plan.ServiceTimes.First(t => t.TimeType == "Service").StartsAtUnformatted.Replace(" +0000", string.Empty));
         }
 
         public Plan Item
@@ -33,7 +33,7 @@ namespace PcoWeb.Models
         {
             get
             {
-                return this.plan.plan_title;
+                return this.plan.PlanTitle;
             }
         }
 
@@ -194,14 +194,14 @@ namespace PcoWeb.Models
         {
             string people = string.Join(
                 ", ", 
-                this.plan.plan_people
-                    .Where(pp => pp.category_name == category && pp.position.IndexOf(position, StringComparison.InvariantCultureIgnoreCase) > -1)
-                    .Where(pp => pp.status != "D")  // exclude declined
-                    .Select(p => this.FormatName(p.person_name)));
+                this.plan.PlanPeople
+                    .Where(pp => pp.CategoryName == category && pp.Position.IndexOf(position, StringComparison.InvariantCultureIgnoreCase) > -1)
+                    .Where(pp => pp.Status != "D")  // exclude declined
+                    .Select(p => this.FormatName(p.PersonName)));
 
             if (string.IsNullOrWhiteSpace(people))
             {
-                if (!this.plan.positions.Any(p => p.category_name == category && p.position.IndexOf(position, StringComparison.InvariantCultureIgnoreCase) > -1))
+                if (!this.plan.Positions.Any(p => p.CategoryName == category && p.Name.IndexOf(position, StringComparison.InvariantCultureIgnoreCase) > -1))
                 {
                     return "#"; // No one required.
                 }
@@ -212,7 +212,7 @@ namespace PcoWeb.Models
 
         private string GetPlanNote(string name)
         {
-            return this.plan.plan_notes.FirstOrDefault(n => n.category_name.IndexOf(name, StringComparison.InvariantCultureIgnoreCase) > -1).Try(n => n.note);
+            return this.plan.PlanNotes.FirstOrDefault(n => n.CategoryName.IndexOf(name, StringComparison.InvariantCultureIgnoreCase) > -1).Try(n => n.Note);
         }
 
         /*

@@ -4,17 +4,17 @@
 @using System.Globalization
 @model LivePlanModel
 @{
-    ViewBag.Title = "Live – " + (Model.StartTime.HasValue ? Model.StartTime.Value.ToString("dd.MM.yyyy – ") : string.Empty) + Model.Item.service_type_name;
+    ViewBag.Title = "Live – " + (Model.StartTime.HasValue ? Model.StartTime.Value.ToString("dd.MM.yyyy – ") : string.Empty) + Model.Item.ServiceTypeName;
 
     int cols = 4;
 }
 <div class="live-tag" style="display:none"><span>live</span></div>
 <div class="offset-tag" style="display:none"><span>switch</span></div>
 <div class="plan-info">
-    <h3>@(string.IsNullOrWhiteSpace(Model.Item.plan_title) ? Model.Item.service_type_name : (Model.Item.plan_title + string.Format(" ({0})", Model.Item.service_type_name)))</h3>
-@if (!string.IsNullOrWhiteSpace(Model.Item.series_title))
+    <h3>@(string.IsNullOrWhiteSpace(Model.Item.PlanTitle) ? Model.Item.ServiceTypeName : (Model.Item.PlanTitle + string.Format(" ({0})", Model.Item.ServiceTypeName)))</h3>
+@if (!string.IsNullOrWhiteSpace(Model.Item.SeriesTitle))
 {
-    <h4>@Model.Item.series_title</h4>
+    <h4>@Model.Item.SeriesTitle</h4>
 }
 @if (Model.StartTime.HasValue)
 {
@@ -30,34 +30,34 @@
 @foreach (LivePlanItemModel item in this.Model.Items)
 {
 <tr class="type-@item.ItemType akteur-@item.Akteur.ToLower().Split(' ').First()" 
-    data-id="@item.Item.id" 
-    data-item-length="@item.Item.length"
+    data-id="@item.Item.Id" 
+    data-item-length="@item.Item.Length"
     data-time-offset="@((item.TimePoint.HasValue && Model.StartTime.HasValue) ? (item.TimePoint.Value - Model.StartTime.Value).TotalSeconds.ToString() : default(string))">
 @switch (item.ItemType)
 {
     case PlanItemType.Header:
-            <td colspan="@cols">@item.Item.title</td>
+            <td colspan="@cols">@item.Item.Title</td>
         break;
     case PlanItemType.Song:
     case PlanItemType.Normal:
     default:
-            <td>@item.Item.sequence</td>
-            <td class="time"><span class="timepoint">@(item.TimePoint.HasValue ? item.TimePointLocal.Value.ToShortTimeString() : string.Empty)</span><span class="length">@(((item.Time == null && !item.TimePoint.HasValue) || (item.Time != null && item.Time.exclude)) ? string.Empty : item.Item.length_formatted)</span></td>
+            <td>@item.Item.Sequence</td>
+            <td class="time"><span class="timepoint">@(item.TimePoint.HasValue ? item.TimePointLocal.Value.ToShortTimeString() : string.Empty)</span><span class="length">@(((item.Time == null && !item.TimePoint.HasValue) || (item.Time != null && item.Time.Exclude)) ? string.Empty : item.Item.LengthFormatted)</span></td>
             <td>
                 <div class="title">
-                    <span class="inner-title">@item.Item.title</span>
+                    <span class="inner-title">@item.Item.Title</span>
                     @if (item.ItemType == PlanItemType.Song && item.Arrangement != null && item.Arrangement.Parts.Any())
                     {
                         <span class="action song-toggle"></span>
                     }
                 </div>
-                @if (!string.IsNullOrEmpty(item.Item.description))
+                @if (!string.IsNullOrEmpty(item.Item.Description))
                 {
                     <div class="description">
                         @item.Description
                     </div>
                 }
-                @if (!string.IsNullOrEmpty(item.Item.detail))
+                @if (!string.IsNullOrEmpty(item.Item.Detail))
                 {
                     <div class="detail">
                         @item.Detail
@@ -102,8 +102,8 @@
 @section sidebar
 {
 <div class="plan-nav">
-    <a href="@Url.Action("Live", new { id = Model.Item.prev_plan_id})" class="previous"><span class="icon">Previous</span></a>
-    <a href="@Url.Action("Live", new { id = Model.Item.next_plan_id})" class="next"><span class="icon">Next</span></a>
+    <a href="@Url.Action("Live", new { id = Model.Item.PrevPlanId})" class="previous"><span class="icon">Previous</span></a>
+    <a href="@Url.Action("Live", new { id = Model.Item.NextPlanId})" class="next"><span class="icon">Next</span></a>
 </div>
 <div class="plan-clock">
     <h3>Zeit</h3>

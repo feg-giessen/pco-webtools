@@ -1,13 +1,17 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace PcoBase
 {
     public class Properties
     {
-        public string class_name { get; set; }
+        [JsonProperty("class_name")]
+        public string ClassName { get; set; }
 
-        public List<object> fields { get; set; }
+        [JsonProperty("fields")]
+        public List<object> Fields { get; set; }
 
-        public List<object> options { get; set; }
+        [JsonProperty("options")]
+        public List<object> Options { get; set; }
     }
 }

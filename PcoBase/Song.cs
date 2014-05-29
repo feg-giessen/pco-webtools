@@ -1,37 +1,53 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace PcoBase
 {
     public class Song
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
 
-        public string title { get; set; }
+        [JsonProperty("title")]
+        public string Title { get; set; }
 
-        public string admin { get; set; }
+        [JsonProperty("admin")]
+        public string Admin { get; set; }
 
-        public string author { get; set; }
+        [JsonProperty("author")]
+        public string Author { get; set; }
 
-        public int? ccli_id { get; set; }
+        [JsonProperty("ccli_id")]
+        public int? CcliId { get; set; }
 
-        public string copyright { get; set; }
+        [JsonProperty("copyright")]
+        public string Copyright { get; set; }
 
-        public string created_at { get; set; }
+        [JsonProperty("created_at")]
+        public string CreatedAt { get; set; }
 
-        public int created_by_id { get; set; }
+        [JsonProperty("created_by_id")]
+        public int CreatedById { get; set; }
 
-        public bool hidden { get; set; }
+        [JsonProperty("hidden")]
+        public bool Hidden { get; set; }
 
-        public string notes { get; set; }
+        [JsonProperty("notes")]
+        public string Notes { get; set; }
 
-        public string themes { get; set; }
+        [JsonProperty("themes")]
+        public string Themes { get; set; }
 
-        public string updated_at { get; set; }
+        [JsonProperty("updated_at")]
+        public string UpdatedAt { get; set; }
 
-        public int updated_by_id { get; set; }
+        [JsonProperty("updated_by_id")]
+        public int UpdatedById { get; set; }
 
-        public int last_plan_id { get; set; }
+        [JsonProperty("last_plan_id")]
+        public int LastPlanId { get; set; }
 
-        public List<object> attachments { get; set; }
+        [JsonProperty("attachments")]
+        public List<object> Attachments { get; set; }
     }
 }

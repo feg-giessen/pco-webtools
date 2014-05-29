@@ -40,7 +40,7 @@ namespace PcoWeb.Controllers
                 model.Ende = quartal.End;
             }
 
-            model.ServiceTypeList.AddRange(org.service_types);
+            model.ServiceTypeList.AddRange(org.ServiceTypes);
 
             if (model.ServiceTypes != null)
             {
@@ -60,15 +60,15 @@ namespace PcoWeb.Controllers
 
                 foreach (var st in model.ServiceTypeList)
                 {
-                    if (!model.ServiceTypes.Contains(st.id.ToString(CultureInfo.InvariantCulture)))
+                    if (!model.ServiceTypes.Contains(st.Id.ToString(CultureInfo.InvariantCulture)))
                         continue;
 
-                    var allPlans = service.GetPlans(st.id, true);
+                    var allPlans = service.GetPlans(st.Id, true);
 
                     plans.AddRange(allPlans
-                        .Select(p => new { Plan = p, Date = ViewHelpers.FormtatedDate(p.dates) })
+                        .Select(p => new { Plan = p, Date = ViewHelpers.FormtatedDate(p.Dates) })
                         .Where(p => p.Date.HasValue && p.Date >= model.Start && p.Date <= model.Ende)
-                        .Select(p => service.GetPlan(p.Plan.id)));
+                        .Select(p => service.GetPlan(p.Plan.Id)));
                 }
 
                 var planModels = plans.Select(p => new MatrixPlan(p)).OrderBy(p => p.Date).ToList();
@@ -173,9 +173,9 @@ namespace PcoWeb.Controllers
                     var allPlans = web.GetPlans(int.Parse(st), true);
 
                     plans.AddRange(allPlans
-                        .Select(p => new { Plan = p, Date = ViewHelpers.FormtatedDate(p.dates) })
+                        .Select(p => new { Plan = p, Date = ViewHelpers.FormtatedDate(p.Dates) })
                         .Where(p => p.Date.HasValue && p.Date >= quartal.Start && p.Date <= quartal.End)
-                        .Select(p => web.GetPlan(p.Plan.id)));
+                        .Select(p => web.GetPlan(p.Plan.Id)));
                 }
 
                 var planModels = plans.Select(p => new MatrixPlan(p)).OrderBy(p => p.Date).ToList();

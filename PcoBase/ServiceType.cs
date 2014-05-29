@@ -1,23 +1,34 @@
-﻿namespace PcoBase
+﻿using Newtonsoft.Json;
+
+namespace PcoBase
 {
     public class ServiceType
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
 
-        public string name { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
-        public int parent_id { get; set; }
+        [JsonProperty("parent_id")]
+        public int ParentId { get; set; }
 
-        public string type { get; set; }
+        [JsonProperty("type")]
+        public string Type { get; set; }
 
-        public string container { get; set; }
+        [JsonProperty("container")]
+        public string Container { get; set; }
 
-        public object container_id { get; set; }
+        [JsonProperty("container_id")]
+        public object ContainerId { get; set; }
 
-        public int sequence { get; set; }
+        [JsonProperty("sequence")]
+        public int Sequence { get; set; }
 
-        public bool attachment_types_enabled { get; set; }
+        [JsonProperty("attachment_types_enabled")]
+        public bool AttachmentTypesEnabled { get; set; }
 
-        public string permissions { get; set; }
+        [JsonProperty("permissions")]
+        public string Permissions { get; set; }
     }
 }

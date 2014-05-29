@@ -39,7 +39,7 @@ namespace PcoWeb.Export
                 {
                     sheet.Cells[row, 3].Value = string.Format("{0:HH:mm}", plan.Date);
                     
-                    switch (plan.Item.service_type_id)
+                    switch (plan.Item.ServiceTypeId)
                     {
                         case 200602:
                             // Abend

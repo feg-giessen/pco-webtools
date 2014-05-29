@@ -46,7 +46,7 @@ namespace PcoWeb.Export
             Font header = FontFactory.GetFont("Arial", baseFontSize, Font.BOLD);
 
             var titleContent = new Paragraph(new Chunk(
-                string.Format(culture, "{2} – Gesamtdienstplan {0:dd.MM.}–{1:dd.MM.yyyy}", start, end, org.name), 
+                string.Format(culture, "{2} – Gesamtdienstplan {0:dd.MM.}–{1:dd.MM.yyyy}", start, end, org.Name), 
                 title))
             {
                 SpacingAfter = 10,
@@ -147,7 +147,7 @@ namespace PcoWeb.Export
             {
                 Font cellFont;
                 
-                switch (plan.Item.service_type_id)
+                switch (plan.Item.ServiceTypeId)
                 {
                     //case 200602:
                     //    cellFont = FontFactory.GetFont("Arial", baseFontSize, BaseColor.RED);
@@ -178,7 +178,7 @@ namespace PcoWeb.Export
                 table.AddCell(phraseFactory(plan.Bistro, cellFont));
                 table.AddCell(phraseFactory(plan.Deko, cellFont));
                                 
-                switch (plan.Item.service_type_id)
+                switch (plan.Item.ServiceTypeId)
                 {
                     case 200602:
                         foreach (var cell in table.GetRow(row).GetCells())

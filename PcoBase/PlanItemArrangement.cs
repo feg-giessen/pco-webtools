@@ -1,21 +1,31 @@
-﻿namespace PcoBase
+﻿using Newtonsoft.Json;
+
+namespace PcoBase
 {
     public class PlanItemArrangement
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
 
-        public string name { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
-        public object bpm { get; set; }
+        [JsonProperty("bpm")]
+        public object Bpm { get; set; }
 
-        public bool has_chords { get; set; }
+        [JsonProperty("has_chords")]
+        public bool HasChords { get; set; }
 
-        public bool has_chord_chart { get; set; }
+        [JsonProperty("has_chord_chart")]
+        public bool HasChordChart { get; set; }
 
-        public int length { get; set; }
+        [JsonProperty("length")]
+        public int Length { get; set; }
 
-        public string sequence_to_s { get; set; }
+        [JsonProperty("sequence_to_s")]
+        public string SequenceToS { get; set; }
 
-        public string meter { get; set; }
+        [JsonProperty("meter")]
+        public string Meter { get; set; }
     }
 }

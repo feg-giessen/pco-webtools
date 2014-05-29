@@ -1,37 +1,55 @@
-﻿namespace PcoBase
+﻿using Newtonsoft.Json;
+
+namespace PcoBase
 {
     public class PlanIndex
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
 
-        public string plan_title { get; set; }
+        [JsonProperty("plan_title")]
+        public string PlanTitle { get; set; }
 
-        public string series_title { get; set; }
+        [JsonProperty("series_title")]
+        public string SeriesTitle { get; set; }
 
-        public int service_type_id { get; set; }
+        [JsonProperty("service_type_id")]
+        public int ServiceTypeId { get; set; }
 
-        public string service_type_name { get; set; }
+        [JsonProperty("service_type_name")]
+        public string ServiceTypeName { get; set; }
 
-        public string dates { get; set; }
+        [JsonProperty("dates")]
+        public string Dates { get; set; }
 
-        public object series { get; set; }
+        [JsonProperty("series")]
+        public object Series { get; set; }
 
-        public bool @public { get; set; }
+        [JsonProperty("public")]
+        public bool Public { get; set; }
 
-        public string updated_at { get; set; }
+        [JsonProperty("updated_at")]
+        public string UpdatedAt { get; set; }
 
-        public string created_at { get; set; }
+        [JsonProperty("created_at")]
+        public string CreatedAt { get; set; }
 
-        public string sort_date { get; set; }
+        [JsonProperty("sort_date")]
+        public string SortDate { get; set; }
 
-        public string type { get; set; }
+        [JsonProperty("type")]
+        public string Type { get; set; }
 
-        public UserReference updated_by { get; set; }
+        [JsonProperty("updated_by")]
+        public UserReference UpdatedBy { get; set; }
 
-        public UserReference created_by { get; set; }
+        [JsonProperty("created_by")]
+        public UserReference CreatedBy { get; set; }
 
-        public string permissions { get; set; }
+        [JsonProperty("permissions")]
+        public string Permissions { get; set; }
 
-        public bool scheduled { get; set; }
+        [JsonProperty("scheduled")]
+        public bool Scheduled { get; set; }
     }
 }

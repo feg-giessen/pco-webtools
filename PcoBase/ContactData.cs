@@ -1,17 +1,23 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace PcoBase
 {
     public class ContactData
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+		public int Id { get; set; }
 
-        public int person_id { get; set; }
+        [JsonProperty("person_id")]
+		public int PersonId { get; set; }
 
-        public List<Address> addresses { get; set; }
+        [JsonProperty("addresses")]
+		public List<Address> Addresses { get; set; }
 
-        public List<EmailAddress> email_addresses { get; set; }
+        [JsonProperty("email_addresses")]
+		public List<EmailAddress> EmailAddresses { get; set; }
 
-        public List<PhoneNumber> phone_numbers { get; set; }
+        [JsonProperty("phone_numbers")]
+		public List<PhoneNumber> PhoneNumbers { get; set; }
     }
 }

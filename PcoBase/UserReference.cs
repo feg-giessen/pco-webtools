@@ -1,9 +1,13 @@
-﻿namespace PcoBase
+﻿using Newtonsoft.Json;
+
+namespace PcoBase
 {
     public class UserReference
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
 
-        public string name { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
     }
 }

@@ -1,41 +1,59 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace PcoBase
 {
     public class Attachment
     {
-        public string id { get; set; }
+        [JsonProperty("id")]
+		public string Id { get; set; }
 
-        public string url { get; set; }
+        [JsonProperty("url")]
+		public string Url { get; set; }
 
-        public bool allow_mp3_download { get; set; }
+        [JsonProperty("allow_mp3_download")]
+        public bool AllowMp3Download { get; set; }
 
-        public string content_type { get; set; }
+        [JsonProperty("content_type")]
+		public string ContentType { get; set; }
 
-        public string filename { get; set; }
+        [JsonProperty("filename")]
+		public string Filename { get; set; }
 
-        public bool downloadable { get; set; }
+        [JsonProperty("downloadable")]
+		public bool Downloadable { get; set; }
 
-        public bool streamable { get; set; }
+        [JsonProperty("streamable")]
+		public bool Streamable { get; set; }
 
-        public object comma_separated_page_order { get; set; }
+        [JsonProperty("comma_separated_page_order")]
+		public object CommaSeparatedPageOrder { get; set; }
 
-        public string comma_separated_attachment_type_ids { get; set; }
+        [JsonProperty("comma_separated_attachment_type_ids")]
+		public string CommaSeparatedAttachmentTypeIds { get; set; }
 
-        public string linked_object_type { get; set; }
+        [JsonProperty("linked_object_type")]
+		public string LinkedObjectType { get; set; }
 
-        public int linked_object_id { get; set; }
+        [JsonProperty("linked_object_id")]
+		public int LinkedObjectId { get; set; }
 
-        public double? offset_x { get; set; }
+        [JsonProperty("offset_x")]
+        public double? OffsetX { get; set; }
 
-        public double? offset_y { get; set; }
+        [JsonProperty("offset_y")]
+        public double? OffsetY { get; set; }
 
-        public double? zoom { get; set; }
+        [JsonProperty("zoom")]
+        public double? Zoom { get; set; }
 
-        public List<object> custom_zooms { get; set; }
+        [JsonProperty("custom_zooms")]
+		public List<object> CustomZooms { get; set; }
 
-        public string secure_link { get; set; }
+        [JsonProperty("secure_link")]
+		public string SecureLink { get; set; }
 
-        public string updated_at { get; set; }
+        [JsonProperty("updated_at")]
+		public string UpdatedAt { get; set; }
     }
 }

@@ -1,17 +1,25 @@
-﻿namespace PcoBase
+﻿using Newtonsoft.Json;
+
+namespace PcoBase
 {
     public class Property
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
 
-        public int field_id { get; set; }
+        [JsonProperty("field_id")]
+        public int FieldId { get; set; }
 
-        public string field { get; set; }
+        [JsonProperty("field")]
+        public string Field { get; set; }
 
-        public bool field_allows_multiple_selections { get; set; }
+        [JsonProperty("field_allows_multiple_selections")]
+        public bool FieldAllowsMultipleSelections { get; set; }
 
-        public string option { get; set; }
+        [JsonProperty("option")]
+        public string Option { get; set; }
 
-        public int option_id { get; set; }
+        [JsonProperty("option_id")]
+        public int OptionId { get; set; }
     }
 }

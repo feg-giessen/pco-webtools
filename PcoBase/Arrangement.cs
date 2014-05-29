@@ -1,57 +1,82 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace PcoBase
 {
     public class Arrangement
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+		public int Id { get; set; }
 
-        public string name { get; set; }
+        [JsonProperty("name")]
+		public string Name { get; set; }
 
-        public object bpm { get; set; }
+        [JsonProperty("bpm")]
+		public object Bpm { get; set; }
 
-        public bool has_chords { get; set; }
+        [JsonProperty("has_chords")]
+		public bool HasChords { get; set; }
 
-        public bool has_chord_chart { get; set; }
+        [JsonProperty("has_chord_chart")]
+		public bool HasChordChart { get; set; }
 
-        public int length { get; set; }
+        [JsonProperty("length")]
+		public int Length { get; set; }
 
-        public string sequence_to_s { get; set; }
+        [JsonProperty("sequence_to_s")]
+		public string SequenceToS { get; set; }
 
-        public string meter { get; set; }
+        [JsonProperty("meter")]
+		public string Meter { get; set; }
 
-        public int song_id { get; set; }
+        [JsonProperty("song_id")]
+		public int SongId { get; set; }
 
-        public int update_by_id { get; set; }
+        [JsonProperty("update_by_id")]
+		public int UpdateById { get; set; }
 
-        public int created_by_id { get; set; }
+        [JsonProperty("created_by_id")]
+		public int CreatedById { get; set; }
 
-        public string updated_at { get; set; }
+        [JsonProperty("updated_at")]
+		public string UpdatedAt { get; set; }
 
-        public string created_at { get; set; }
+        [JsonProperty("created_at")]
+		public string CreatedAt { get; set; }
 
-        public string notes { get; set; }
+        [JsonProperty("notes")]
+		public string Notes { get; set; }
 
-        public int minutes { get; set; }
+        [JsonProperty("minutes")]
+		public int Minutes { get; set; }
 
-        public int seconds { get; set; }
+        [JsonProperty("seconds")]
+		public int Seconds { get; set; }
 
-        public string formatted_length { get; set; }
+        [JsonProperty("formatted_length")]
+		public string FormattedLength { get; set; }
 
-        public List<object> custom_zooms { get; set; }
+        public List<object> CustomZooms { get; set; }
 
-        public string chord_chart { get; set; }
+        [JsonProperty("chord_chart")]
+		public string ChordChart { get; set; }
 
-        public List<Attachment> attachments { get; set; }
+        [JsonProperty("attachments")]
+        public List<Attachment> Attachments { get; set; }
 
-        public string chord_chart_key { get; set; }
+        [JsonProperty("chord_chart_key")]
+		public string ChordChartKey { get; set; }
 
-        public string chord_chart_font { get; set; }
+        [JsonProperty("chord_chart_font")]
+		public string ChordChartFont { get; set; }
 
-        public int chord_chart_columns { get; set; }
+        [JsonProperty("chord_chart_columns")]
+		public int ChordChartColumns { get; set; }
 
-        public int chord_chart_font_size { get; set; }
+        [JsonProperty("chord_chart_font_size")]
+		public int ChordChartFontSize { get; set; }
 
-        public List<Property> properties { get; set; }
+        [JsonProperty("properties")]
+        public List<Property> Properties { get; set; }
     }
 }

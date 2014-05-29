@@ -1,17 +1,23 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace PcoBase
 {
     public class Key
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+		public int Id { get; set; }
 
-        public string starting { get; set; }
+        [JsonProperty("starting")]
+		public string Starting { get; set; }
 
-        public string ending { get; set; }
+        [JsonProperty("ending")]
+		public string Ending { get; set; }
 
-        public string name { get; set; }
+        [JsonProperty("name")]
+		public string Name { get; set; }
 
-        public List<object> alternate_keys { get; set; }
+        [JsonProperty("alternate_keys")]
+		public List<object> AlternateKeys { get; set; }
     }
 }

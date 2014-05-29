@@ -1,19 +1,28 @@
-﻿namespace PcoBase
+﻿using Newtonsoft.Json;
+
+namespace PcoBase
 {
     public class ItemTime
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+		public int Id { get; set; }
 
-        public int plan_item_id { get; set; }
+        [JsonProperty("plan_item_id")]
+		public int PlanItemId { get; set; }
 
-        public int time_id { get; set; }
+        [JsonProperty("time_id")]
+		public int TimeId { get; set; }
 
-        public object live_start { get; set; }
+        [JsonProperty("live_start")]
+		public object LiveStart { get; set; }
 
-        public object live_end { get; set; }
+        [JsonProperty("live_end")]
+		public object LiveEnd { get; set; }
 
-        public int plan_id { get; set; }
+        [JsonProperty("plan_id")]
+		public int PlanId { get; set; }
 
-        public bool exclude { get; set; }
+        [JsonProperty("exclude")]
+		public bool Exclude { get; set; }
     }
 }

@@ -1,23 +1,34 @@
-﻿namespace PcoBase
+﻿using Newtonsoft.Json;
+
+namespace PcoBase
 {
     public class PhoneNumber
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+		public int Id { get; set; }
 
-        public string number { get; set; }
+        [JsonProperty("number")]
+		public string Number { get; set; }
 
-        public bool text_enabled { get; set; }
+        [JsonProperty("text_enabled")]
+		public bool TextEnabled { get; set; }
 
-        public bool text_for_plan_emails { get; set; }
+        [JsonProperty("text_for_plan_emails")]
+		public bool TextForPlanEmails { get; set; }
 
-        public bool text_for_notifications { get; set; }
+        [JsonProperty("text_for_notifications")]
+		public bool TextForNotifications { get; set; }
 
-        public bool text_for_reminders { get; set; }
+        [JsonProperty("text_for_reminders")]
+		public bool TextForReminders { get; set; }
 
-        public bool text_for_people_emails { get; set; }
+        [JsonProperty("text_for_people_emails")]
+		public bool TextForPeopleEmails { get; set; }
 
-        public string carrier { get; set; }
+        [JsonProperty("carrier")]
+		public string Carrier { get; set; }
 
-        public string location { get; set; }
+        [JsonProperty("location")]
+		public string Location { get; set; }
     }
 }

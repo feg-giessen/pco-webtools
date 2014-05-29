@@ -1,33 +1,49 @@
-﻿namespace PcoBase
+﻿using Newtonsoft.Json;
+
+namespace PcoBase
 {
     public class PlanPeople
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
 
-        public int plan_id { get; set; }
+        [JsonProperty("plan_id")]
+        public int PlanId { get; set; }
 
-        public string position { get; set; }
+        [JsonProperty("position")]
+        public string Position { get; set; }
 
-        public string status { get; set; }
+        [JsonProperty("status")]
+        public string Status { get; set; }
 
-        public bool prepare_notification { get; set; }
+        [JsonProperty("prepare_notification")]
+        public bool PrepareNotification { get; set; }
 
-        public int category_id { get; set; }
+        [JsonProperty("category_id")]
+        public int CategoryId { get; set; }
 
-        public string category_name { get; set; }
+        [JsonProperty("category_name")]
+        public string CategoryName { get; set; }
 
-        public int? category_sequence { get; set; }
+        [JsonProperty("category_sequence")]
+        public int? CategorySequence { get; set; }
 
-        public string person_photo_thumbnail { get; set; }
+        [JsonProperty("person_photo_thumbnail")]
+        public string PersonPhotoThumbnail { get; set; }
 
-        public int person_id { get; set; }
+        [JsonProperty("person_id")]
+        public int PersonId { get; set; }
 
-        public string person_name { get; set; }
+        [JsonProperty("person_name")]
+        public string PersonName { get; set; }
 
-        public int? responds_to_id { get; set; }
+        [JsonProperty("responds_to_id")]
+        public int? RespondsToId { get; set; }
 
-        public string excluded_times { get; set; }
+        [JsonProperty("excluded_times")]
+        public string ExcludedTimes { get; set; }
 
-        public string notes { get; set; }
+        [JsonProperty("notes")]
+        public string Notes { get; set; }
     }
 }

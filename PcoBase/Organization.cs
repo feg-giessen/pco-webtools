@@ -1,35 +1,50 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace PcoBase
 {
     public class Organization
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+		public int Id { get; set; }
 
-        public int account_center_id { get; set; }
+        [JsonProperty("account_center_id")]
+		public int AccountCenterId { get; set; }
 
-        public string name { get; set; }
+        [JsonProperty("name")]
+		public string Name { get; set; }
 
-        public string owner_name { get; set; }
+        [JsonProperty("owner_name")]
+		public string OwnerName { get; set; }
 
-        public bool music_stand_enabled { get; set; }
+        [JsonProperty("music_stand_enabled")]
+		public bool MusicStandEnabled { get; set; }
 
-        public object projector_enabled { get; set; }
+        [JsonProperty("projector_enabled")]
+		public object ProjectorEnabled { get; set; }
 
-        public bool ccli_connected { get; set; }
+        [JsonProperty("ccli_connected")]
+		public bool CcliConnected { get; set; }
 
-        public int secret { get; set; }
+        [JsonProperty("secret")]
+		public int Secret { get; set; }
 
-        public int date_format { get; set; }
+        [JsonProperty("date_format")]
+		public int DateFormat { get; set; }
 
-        public bool twenty_four_hour_time { get; set; }
+        [JsonProperty("twenty_four_hour_time")]
+		public bool TwentyFourHourTime { get; set; }
 
-        public int total_songs { get; set; }
+        [JsonProperty("total_songs")]
+		public int TotalSongs { get; set; }
 
-        public int total_people { get; set; }
+        [JsonProperty("total_people")]
+		public int TotalPeople { get; set; }
 
-        public List<ServiceType> service_types { get; set; }
+        [JsonProperty("service_types")]
+		public List<ServiceType> ServiceTypes { get; set; }
 
-        public List<ServiceTypeFolder> service_type_folders { get; set; }
+        [JsonProperty("service_type_folders")]
+		public List<ServiceTypeFolder> ServiceTypeFolders { get; set; }
     }
 }

@@ -3,7 +3,7 @@
 @model PcoWeb.Controllers.VeranstaltungenController.ServiceTypeModel
 
 @{
-    ViewBag.Title = Model.ServiceType.name;
+    ViewBag.Title = Model.ServiceType.Name;
     var cultureInfo = CultureInfo.GetCultureInfo("de-DE");
 }
 <h1>@ViewBag.Title</h1>
@@ -12,10 +12,10 @@
 <ul>
     @foreach (var item in Model.Plans)
     {
-        var date = ViewHelpers.FormtatedDate(item.dates);
+        var date = ViewHelpers.FormtatedDate(item.Dates);
         if (date.HasValue)
         {
-            <li>@Html.ActionLink(date.Value.ToString("dd. MMMM yyyy", cultureInfo), "Live", new { id = item.id })</li>
+            <li>@Html.ActionLink(date.Value.ToString("dd. MMMM yyyy", cultureInfo), "Live", new { id = item.Id })</li>
         }
     }
 </ul>

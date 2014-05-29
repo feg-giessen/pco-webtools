@@ -22,7 +22,7 @@ namespace PcoWeb.Export
 
             var title = sheet.Cells[1, 1, 1, 19];
             title.Merge = true;
-            title.Value = string.Format("{2} – Gesamtdienstplan {0:dd.MM.}–{1:dd.MM.yyyy}", start, end, org.name);
+            title.Value = string.Format("{2} – Gesamtdienstplan {0:dd.MM.}–{1:dd.MM.yyyy}", start, end, org.Name);
             title.Style.Font.Bold = true;
             title.Style.Font.Size = 16;
             title.Style.Font.Name = "Arial";
@@ -96,7 +96,7 @@ namespace PcoWeb.Export
                 sheet.Cells[row, 18].Value = plan.Bistro;
                 sheet.Cells[row, 19].Value = plan.Deko;
 
-                switch (plan.Item.service_type_id)
+                switch (plan.Item.ServiceTypeId)
                 {
                     /*case 200602:
                         sheet.Cells[row, 1, row, 19].Style.Font.Color.SetColor(Color.Red);

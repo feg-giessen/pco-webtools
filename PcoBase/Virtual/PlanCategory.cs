@@ -17,43 +17,43 @@ namespace PcoBase.Virtual
         {
             var list = new List<PlanCategory>();
 
-            foreach (PlanPeople item in plan.plan_people)
+            foreach (PlanPeople item in plan.PlanPeople)
             {
-                PlanCategory category = list.FirstOrDefault(x => x.id == item.category_id);
+                PlanCategory category = list.FirstOrDefault(x => x.id == item.CategoryId);
 
                 if (category == null)
                 {
-                    category = new PlanCategory { id = item.category_id, name = item.category_name, sequence = item.category_sequence ?? int.MaxValue, positions = new List<PlanPosition>(), };
+                    category = new PlanCategory { id = item.CategoryId, name = item.CategoryName, sequence = item.CategorySequence ?? int.MaxValue, positions = new List<PlanPosition>(), };
 
                     list.Add(category);
                 }
 
-                PlanPosition position = category.positions.FirstOrDefault(x => x.name == item.position);
+                PlanPosition position = category.positions.FirstOrDefault(x => x.name == item.Position);
 
                 if (position == null)
                 {
-                    position = new PlanPosition { name = item.position };
+                    position = new PlanPosition { name = item.Position };
 
                     category.positions.Add(position);
                 }
             }
 
-            foreach (Position item in plan.positions)
+            foreach (Position item in plan.Positions)
             {
-                PlanCategory category = list.FirstOrDefault(x => x.id == item.category_id);
+                PlanCategory category = list.FirstOrDefault(x => x.id == item.CategoryId);
 
                 if (category == null)
                 {
-                    category = new PlanCategory { id = item.category_id, name = item.category_name, sequence = item.category_sequence ?? int.MaxValue, positions = new List<PlanPosition>(), };
+                    category = new PlanCategory { id = item.CategoryId, name = item.CategoryName, sequence = item.CategorySequence ?? int.MaxValue, positions = new List<PlanPosition>(), };
 
                     list.Add(category);
                 }
 
-                PlanPosition position = category.positions.FirstOrDefault(x => x.name == item.position);
+                PlanPosition position = category.positions.FirstOrDefault(x => x.name == item.Name);
 
                 if (position == null)
                 {
-                    position = new PlanPosition { name = item.position };
+                    position = new PlanPosition { name = item.Name };
 
                     category.positions.Add(position);
                 }

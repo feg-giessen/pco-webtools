@@ -18,45 +18,45 @@ namespace PcoWeb.Models
         public LivePlanModel(Plan plan, Func<int, Arrangement> arrangements)
         {
             this.Item = plan;
-            this.Items = plan.items.Select(i => new LivePlanItemModel(i, this.Time)).ToList();
+            this.Items = plan.Items.Select(i => new LivePlanItemModel(i, this.Time)).ToList();
 
-            this.People = plan.plan_people;
+            this.People = plan.PlanPeople;
 
             ServiceTime time = this.Time;
             if (time != null)
             {
-                this.StartTime = DateTime.Parse(time.starts_at).ToUniversalTime(); //.Replace(" +0000", string.Empty));
-                this.EndTime = DateTime.Parse(time.ends_at).ToUniversalTime();
+                this.StartTime = DateTime.Parse(time.StartsAt).ToUniversalTime(); //.Replace(" +0000", string.Empty));
+                this.EndTime = DateTime.Parse(time.EndsAt).ToUniversalTime();
 
                 int sum = 0;
-                foreach (var item in this.Items.Where(i => i.Item.is_preservice).OrderByDescending(s => s.Item.sequence))
+                foreach (var item in this.Items.Where(i => i.Item.IsPreservice).OrderByDescending(s => s.Item.Sequence))
                 {
-                    if (item.Time != null && !item.Time.exclude && item.Time.time_id == time.id)
+                    if (item.Time != null && !item.Time.Exclude && item.Time.TimeId == time.Id)
                     {
-                        item.TimePoint = this.StartTime.Value.AddSeconds(-1 * (sum + item.Item.length));
-                        sum += item.Item.length;
+                        item.TimePoint = this.StartTime.Value.AddSeconds(-1 * (sum + item.Item.Length));
+                        sum += item.Item.Length;
                     }
                 }
 
-                bool HasPlanItemTimes = this.Items.Any(i => !i.Item.is_preservice && !i.Item.is_postservice && i.Time != null);
+                bool HasPlanItemTimes = this.Items.Any(i => !i.Item.IsPreservice && !i.Item.IsPostservice && i.Time != null);
 
                 sum = 0;
-                foreach (var item in this.Items.Where(i => !i.Item.is_preservice && !i.Item.is_postservice).OrderBy(s => s.Item.sequence))
+                foreach (var item in this.Items.Where(i => !i.Item.IsPreservice && !i.Item.IsPostservice).OrderBy(s => s.Item.Sequence))
                 {
                     if (!HasPlanItemTimes 
-                        || (item.Time != null && !item.Time.exclude && item.Time.time_id == time.id))
+                        || (item.Time != null && !item.Time.Exclude && item.Time.TimeId == time.Id))
                     {
                         item.TimePoint = this.StartTime.Value.AddSeconds(sum);
-                        sum += item.Item.length;
+                        sum += item.Item.Length;
 
                         this.EndTime = item.TimePoint;
                     }
                 }
             }
 
-            foreach (var item in this.Items.Where(i => i.ItemType == PlanItemType.Song && i.Item.arrangement_id.HasValue))
+            foreach (var item in this.Items.Where(i => i.ItemType == PlanItemType.Song && i.Item.ArrangementId.HasValue))
             {
-                var arr = arrangements(item.Item.arrangement_id.Value);
+                var arr = arrangements(item.Item.ArrangementId.Value);
 
                 if (arr != null)
                 {
@@ -69,7 +69,7 @@ namespace PcoWeb.Models
 
         public ServiceTime Time
         {
-            get { return this.Item.Try(i => i.service_times.FirstOrDefault(t => t.time_type == "Service")); }
+            get { return this.Item.Try(i => i.ServiceTimes.FirstOrDefault(t => t.TimeType == "Service")); }
         }
 
         public DateTime? StartTime
@@ -108,8 +108,8 @@ namespace PcoWeb.Models
             get
             {
                 return this.People
-                    .Where(p => p.position != null && p.status != "D" && p.position.IndexOf("Gesang", StringComparison.OrdinalIgnoreCase) > -1)
-                    .OrderBy(p => p.person_name)
+                    .Where(p => p.Position != null && p.Status != "D" && p.Position.IndexOf("Gesang", StringComparison.OrdinalIgnoreCase) > -1)
+                    .OrderBy(p => p.PersonName)
                     .Select(p => new SingerModel(p));
             }
         }
@@ -126,19 +126,19 @@ namespace PcoWeb.Models
 
         public int Id
         {
-            get { return this.person.person_id; }
+            get { return this.person.PersonId; }
         }
 
         public string Name
         {
-            get { return this.person.person_name; }
+            get { return this.person.PersonName; }
         }
 
         public string Shortcut
         {
             get 
             { 
-                string[] nameParts = (this.person.person_name ?? string.Empty).Split(' ');
+                string[] nameParts = (this.person.PersonName ?? string.Empty).Split(' ');
 
                 if (nameParts.Length > 1)
                 {
@@ -166,7 +166,7 @@ namespace PcoWeb.Models
         public LivePlanItemModel(Item item, ServiceTime time)
         {
             this.Item = item;
-            this.Time = item.plan_item_times.FirstOrDefault(t => t.time_id == time.id);
+            this.Time = item.PlanItemTimes.FirstOrDefault(t => t.TimeId == time.Id);
         }
 
         public Item Item { get; private set; }
@@ -190,10 +190,10 @@ namespace PcoWeb.Models
         {
             get
             {
-                if (this.Item.type == "PlanHeader")
+                if (this.Item.Type == "PlanHeader")
                     return PlanItemType.Header;
 
-                if (this.Item.song != null)
+                if (this.Item.Song != null)
                     return PlanItemType.Song;
 
                 return PlanItemType.Normal;
@@ -207,22 +207,22 @@ namespace PcoWeb.Models
 
         public IHtmlString Description
         {
-            get { return Helper.Nl2br(this.Item.description); }
+            get { return Helper.Nl2br(this.Item.Description); }
         }
 
         public IHtmlString Detail
         {
-            get { return MvcHtmlString.Create(this.Item.detail); }
+            get { return MvcHtmlString.Create(this.Item.Detail); }
         }
 
         public IEnumerable<Sequence> SongSequence
         {
             get
             {
-                if (string.IsNullOrEmpty(this.Item.arrangement_sequence_to_s))
+                if (string.IsNullOrEmpty(this.Item.ArrangementSequenceToS))
                     return Enumerable.Empty<Sequence>();
 
-                return this.Item.arrangement_sequence_to_s.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries)
+                return this.Item.ArrangementSequenceToS.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries)
                     .Where(s => !string.IsNullOrWhiteSpace(s))
                     .Select(s => new Sequence { Title = s.Trim() });
             }
@@ -232,7 +232,7 @@ namespace PcoWeb.Models
 
         private string GetPlanNote(string name)
         {
-            return this.Item.plan_item_notes.FirstOrDefault(n => n.category_name.IndexOf(name, StringComparison.InvariantCultureIgnoreCase) > -1).Try(n => n.note);
+            return this.Item.PlanItemNotes.FirstOrDefault(n => n.CategoryName.IndexOf(name, StringComparison.InvariantCultureIgnoreCase) > -1).Try(n => n.Note);
         }
 
         public class Sequence 
@@ -268,7 +268,7 @@ namespace PcoWeb.Models
                 throw new ArgumentNullException("arrangement");
 
             this.Parts = new List<SongPart>();
-            this.Create(arrangement.chord_chart);
+            this.Create(arrangement.ChordChart);
             this.TranslateClasses(sequence);
         }
 

@@ -1,17 +1,25 @@
-﻿namespace PcoBase
+﻿using Newtonsoft.Json;
+
+namespace PcoBase
 {
     public class Address
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+		public int Id { get; set; }
 
-        public string street { get; set; }
+        [JsonProperty("street")]
+		public string Street { get; set; }
 
-        public string city { get; set; }
+        [JsonProperty("city")]
+		public string City { get; set; }
 
-        public string state { get; set; }
+        [JsonProperty("state")]
+		public string State { get; set; }
 
-        public string zip { get; set; }
+        [JsonProperty("zip")]
+		public string Zip { get; set; }
 
-        public string location { get; set; }
+        [JsonProperty("location")]
+		public string Location { get; set; }
     }
 }

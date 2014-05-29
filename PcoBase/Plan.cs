@@ -1,69 +1,101 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace PcoBase
 {
     public class Plan
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+		public int Id { get; set; }
 
-        public string plan_title { get; set; }
+        [JsonProperty("plan_title")]
+		public string PlanTitle { get; set; }
 
-        public string series_title { get; set; }
+        [JsonProperty("series_title")]
+		public string SeriesTitle { get; set; }
 
-        public int service_type_id { get; set; }
+        [JsonProperty("service_type_id")]
+		public int ServiceTypeId { get; set; }
 
-        public string service_type_name { get; set; }
+        [JsonProperty("service_type_name")]
+		public string ServiceTypeName { get; set; }
 
-        public string dates { get; set; }
+        [JsonProperty("dates")]
+		public string Dates { get; set; }
 
-        public object series { get; set; }
+        [JsonProperty("series")]
+		public object Series { get; set; }
 
-        public bool @public { get; set; }
+        [JsonProperty("public")]
+        public bool Public { get; set; }
 
-        public string updated_at { get; set; }
+        [JsonProperty("updated_at")]
+		public string UpdatedAt { get; set; }
 
-        public string created_at { get; set; }
+        [JsonProperty("created_at")]
+		public string CreatedAt { get; set; }
 
-        public string sort_date { get; set; }
+        [JsonProperty("sort_date")]
+		public string SortDate { get; set; }
 
-        public string type { get; set; }
+        [JsonProperty("type")]
+		public string Type { get; set; }
 
-        public UserReference updated_by { get; set; }
+        [JsonProperty("updated_by")]
+		public UserReference UpdatedBy { get; set; }
 
-        public UserReference created_by { get; set; }
+        [JsonProperty("created_by")]
+		public UserReference CreatedBy { get; set; }
 
-        public string permissions { get; set; }
+        [JsonProperty("permissions")]
+		public string Permissions { get; set; }
 
-        public ServiceType service_type { get; set; }
+        [JsonProperty("service_type")]
+		public ServiceType ServiceType { get; set; }
 
-        public int total_length { get; set; }
+        [JsonProperty("total_length")]
+		public int TotalLength { get; set; }
 
-        public string total_length_formatted { get; set; }
+        [JsonProperty("total_length_formatted")]
+		public string TotalLengthFormatted { get; set; }
 
-        public string comma_separated_attachment_type_ids { get; set; }
+        [JsonProperty("comma_separated_attachment_type_ids")]
+		public string CommaSeparatedAttachmentTypeIds { get; set; }
 
-        public List<PlanNote> plan_notes { get; set; }
+        [JsonProperty("plan_notes")]
+		public List<PlanNote> PlanNotes { get; set; }
 
-        public List<Position> positions { get; set; }
+        [JsonProperty("positions")]
+		public List<Position> Positions { get; set; }
 
-        public List<Item> items { get; set; }
+        [JsonProperty("items")]
+		public List<Item> Items { get; set; }
 
-        public List<ServiceTime> service_times { get; set; }
+        [JsonProperty("service_times")]
+		public List<ServiceTime> ServiceTimes { get; set; }
 
-        public List<object> rehearsal_times { get; set; }
+        [JsonProperty("rehearsal_times")]
+		public List<object> RehearsalTimes { get; set; }
 
-        public List<object> other_times { get; set; }
+        [JsonProperty("other_times")]
+		public List<object> OtherTimes { get; set; }
 
-        public List<object> attachments { get; set; }
+        [JsonProperty("attachments")]
+		public List<object> Attachments { get; set; }
 
-        public string sort_by { get; set; }
+        [JsonProperty("sort_by")]
+		public string SortBy { get; set; }
 
-        public List<PlanPeople> plan_people { get; set; }
+        [JsonProperty("plan_people")]
+		public List<PlanPeople> PlanPeople { get; set; }
 
-        public int next_plan_id { get; set; }
+        [JsonProperty("next_plan_id")]
+		public int NextPlanId { get; set; }
 
-        public int prev_plan_id { get; set; }
+        [JsonProperty("prev_plan_id")]
+		public int PrevPlanId { get; set; }
 
-        public List<PlanContribution> plan_contributions { get; set; }
+        [JsonProperty("plan_contributions")]
+		public List<PlanContribution> PlanContributions { get; set; }
     }
 }

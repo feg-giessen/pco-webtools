@@ -1,23 +1,32 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace PcoBase
 {
     public class ServiceTypeFolder
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
 
-        public string name { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
-        public int parent_id { get; set; }
+        [JsonProperty("parent_id")]
+        public int ParentId { get; set; }
 
-        public string type { get; set; }
+        [JsonProperty("type")]
+        public string Type { get; set; }
 
-        public string container { get; set; }
+        [JsonProperty("container")]
+        public string Container { get; set; }
 
-        public object container_id { get; set; }
+        [JsonProperty("container_id")]
+        public object ContainerId { get; set; }
 
-        public List<ServiceType> service_types { get; set; }
+        [JsonProperty("service_types")]
+        public List<ServiceType> ServiceTypes { get; set; }
 
-        public List<ServiceTypeFolder> service_type_folders { get; set; }
+        [JsonProperty("service_type_folders")]
+        public List<ServiceTypeFolder> ServiceTypeFolders { get; set; }
     }
 }

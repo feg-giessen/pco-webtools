@@ -1,17 +1,25 @@
-﻿namespace PcoBase
+﻿using Newtonsoft.Json;
+
+namespace PcoBase
 {
     public class PlanNote
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
 
-        public string note { get; set; }
+        [JsonProperty("note")]
+        public string Note { get; set; }
 
-        public int plan_id { get; set; }
+        [JsonProperty("plan_id")]
+        public int PlanId { get; set; }
 
-        public int category_id { get; set; }
+        [JsonProperty("category_id")]
+        public int CategoryId { get; set; }
 
-        public string category_name { get; set; }
+        [JsonProperty("category_name")]
+        public string CategoryName { get; set; }
 
-        public int category_sequence { get; set; }
+        [JsonProperty("category_sequence")]
+        public int CategorySequence { get; set; }
     }
 }

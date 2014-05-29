@@ -1,71 +1,104 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace PcoBase
 {
     public class Item
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+		public int Id { get; set; }
 
-        public string title { get; set; }
+        [JsonProperty("title")]
+		public string Title { get; set; }
 
-        public int sequence { get; set; }
+        [JsonProperty("sequence")]
+		public int Sequence { get; set; }
 
-        public int plan_id { get; set; }
+        [JsonProperty("plan_id")]
+		public int PlanId { get; set; }
 
-        public string dom_id { get; set; }
+        [JsonProperty("dom_id")]
+		public string DomId { get; set; }
 
-        public string type { get; set; }
+        [JsonProperty("type")]
+		public string Type { get; set; }
 
-        public int length { get; set; }
+        [JsonProperty("length")]
+		public int Length { get; set; }
 
-        public string length_formatted { get; set; }
+        [JsonProperty("length_formatted")]
+		public string LengthFormatted { get; set; }
 
-        public string detail { get; set; }
+        [JsonProperty("detail")]
+		public string Detail { get; set; }
 
-        public int comments_count { get; set; }
+        [JsonProperty("comments_count")]
+		public int CommentsCount { get; set; }
 
-        public bool is_preservice { get; set; }
+        [JsonProperty("is_preservice")]
+		public bool IsPreservice { get; set; }
 
-        public bool is_postservice { get; set; }
+        [JsonProperty("is_postservice")]
+		public bool IsPostservice { get; set; }
 
-        public bool is_header { get; set; }
+        [JsonProperty("is_header")]
+		public bool IsHeader { get; set; }
 
-        public List<object> plan_item_medias { get; set; }
+        [JsonProperty("plan_item_medias")]
+		public List<object> PlanItemMedias { get; set; }
 
-        public List<ItemNote> plan_item_notes { get; set; }
+        [JsonProperty("plan_item_notes")]
+		public List<ItemNote> PlanItemNotes { get; set; }
 
-        public List<ItemTime> plan_item_times { get; set; }
+        [JsonProperty("plan_item_times")]
+		public List<ItemTime> PlanItemTimes { get; set; }
 
-        public int ccli_print_single { get; set; }
+        [JsonProperty("ccli_print_single")]
+		public int CcliPrintSingle { get; set; }
 
-        public int ccli_print_collected { get; set; }
+        [JsonProperty("ccli_print_collected")]
+		public int CcliPrintCollected { get; set; }
 
-        public int ccli_screen { get; set; }
+        [JsonProperty("ccli_screen")]
+		public int CcliScreen { get; set; }
 
-        public int ccli_custom_arrangement { get; set; }
+        [JsonProperty("ccli_custom_arrangement")]
+		public int CcliCustomArrangement { get; set; }
 
-        public int ccli_recorded { get; set; }
+        [JsonProperty("ccli_recorded")]
+		public int CcliRecorded { get; set; }
 
-        public int? song_id { get; set; }
+        [JsonProperty("song_id")]
+		public int? SongId { get; set; }
 
-        public int? arrangement_id { get; set; }
+        [JsonProperty("arrangement_id")]
+		public int? ArrangementId { get; set; }
 
-        public int? key_id { get; set; }
+        [JsonProperty("key_id")]
+		public int? KeyId { get; set; }
 
-        public string information { get; set; }
+        [JsonProperty("information")]
+		public string Information { get; set; }
 
-        public string description { get; set; }
+        [JsonProperty("description")]
+		public string Description { get; set; }
 
-        public string arrangement_sequence_to_s { get; set; }
+        [JsonProperty("arrangement_sequence_to_s")]
+		public string ArrangementSequenceToS { get; set; }
 
-        public List<Attachment> attachments { get; set; }
+        [JsonProperty("attachments")]
+		public List<Attachment> Attachments { get; set; }
 
-        public Song song { get; set; }
+        [JsonProperty("song")]
+		public Song Song { get; set; }
 
-        public PlanItemArrangement arrangement { get; set; }
+        [JsonProperty("arrangement")]
+		public PlanItemArrangement Arrangement { get; set; }
 
-        public Key key { get; set; }
+        [JsonProperty("key")]
+		public Key Key { get; set; }
 
-        public string music_stand_attachment_id { get; set; }
+        [JsonProperty("music_stand_attachment_id")]
+		public string MusicStandAttachmentId { get; set; }
     }
 }

@@ -1,57 +1,83 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace PcoBase
 {
     public class Person
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+		public int Id { get; set; }
 
-        public int account_center_id { get; set; }
+        [JsonProperty("account_center_id")]
+		public int AccountCenterId { get; set; }
 
-        public string first_name { get; set; }
+        [JsonProperty("first_name")]
+		public string FirstName { get; set; }
 
-        public string last_name { get; set; }
+        [JsonProperty("last_name")]
+		public string LastName { get; set; }
 
-        public string photo_thumbnail_url { get; set; }
+        [JsonProperty("photo_thumbnail_url")]
+		public string PhotoThumbnailUrl { get; set; }
 
-        public string name { get; set; }
+        [JsonProperty("name")]
+		public string Name { get; set; }
 
-        public string photo_url { get; set; }
+        [JsonProperty("photo_url")]
+		public string PhotoUrl { get; set; }
 
-        public int last_service_type_id { get; set; }
+        [JsonProperty("last_service_type_id")]
+		public int LastServiceTypeId { get; set; }
 
-        public string permissions { get; set; }
+        [JsonProperty("permissions")]
+		public string Permissions { get; set; }
 
-        public string created_at { get; set; }
+        [JsonProperty("created_at")]
+		public string CreatedAt { get; set; }
 
-        public string updated_at { get; set; }
+        [JsonProperty("updated_at")]
+		public string UpdatedAt { get; set; }
 
-        public int organization_id { get; set; }
+        [JsonProperty("organization_id")]
+		public int OrganizationId { get; set; }
 
-        public string notes { get; set; }
+        [JsonProperty("notes")]
+		public string Notes { get; set; }
 
-        public int? created_by_id { get; set; }
+        [JsonProperty("created_by_id")]
+		public int? CreatedById { get; set; }
 
-        public int? updated_by_id { get; set; }
+        [JsonProperty("updated_by_id")]
+		public int? UpdatedById { get; set; }
 
-        public string logged_in_at { get; set; }
+        [JsonProperty("logged_in_at")]
+		public string LoggedInAt { get; set; }
 
-        public string max_permissions { get; set; }
+        [JsonProperty("max_permissions")]
+		public string MaxPermissions { get; set; }
 
-        public List<Property> properties { get; set; }
+        [JsonProperty("properties")]
+		public List<Property> Properties { get; set; }
 
-        public object facebook_id { get; set; }
+        [JsonProperty("facebook_id")]
+		public object FacebookId { get; set; }
 
-        public object remote_id { get; set; }
+        [JsonProperty("remote_id")]
+		public object RemoteId { get; set; }
 
-        public object birthdate { get; set; }
+        [JsonProperty("birthdate")]
+		public object Birthdate { get; set; }
 
-        public object anniversary { get; set; }
+        [JsonProperty("anniversary")]
+		public object Anniversary { get; set; }
 
-        public ContactData contact_data { get; set; }
+        [JsonProperty("contact_data")]
+		public ContactData ContactData { get; set; }
 
-        public object connected_person_ids { get; set; }
+        [JsonProperty("connected_person_ids")]
+		public object ConnectedPersonIds { get; set; }
 
-        public string ical_code { get; set; }
+        [JsonProperty("ical_code")]
+		public string IcalCode { get; set; }
     }
 }

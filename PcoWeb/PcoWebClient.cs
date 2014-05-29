@@ -34,7 +34,7 @@ namespace PcoWeb
         public static bool IsAvailable(Organization organisation)
         {
             return organisation != null
-                && ConfigurationManager.AppSettings["WebApiOrganization"] == organisation.id.ToString()
+                && ConfigurationManager.AppSettings["WebApiOrganization"] == organisation.Id.ToString()
                 && !string.IsNullOrEmpty(ConfigurationManager.AppSettings["WebApiEmail"])
                 && !string.IsNullOrEmpty(ConfigurationManager.AppSettings["WebApiPassword"]);
         }

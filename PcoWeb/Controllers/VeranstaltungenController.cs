@@ -18,7 +18,7 @@ namespace PcoWeb.Controllers
         public ActionResult Index(int? id)
         {
             if (!id.HasValue)
-                return View(HomeController.Organization.service_types);
+                return View(HomeController.Organization.ServiceTypes);
 
             var service = new Service(AuthConfig.ConsumerKey, AuthConfig.ConsumerSecret);
 
@@ -29,7 +29,7 @@ namespace PcoWeb.Controllers
                 "Plans", 
                 new ServiceTypeModel
                 {
-                    ServiceType = organization.service_types.FirstOrDefault(x => x.id == id),
+                    ServiceType = organization.ServiceTypes.FirstOrDefault(x => x.Id == id),
                     Plans = plans,
                 });
         }
