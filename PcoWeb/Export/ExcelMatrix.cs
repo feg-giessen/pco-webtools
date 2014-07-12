@@ -98,13 +98,6 @@ namespace PcoWeb.Export
 
                 switch (plan.Item.ServiceTypeId)
                 {
-                    /*case 200602:
-                        sheet.Cells[row, 1, row, 19].Style.Font.Color.SetColor(Color.Red);
-                        break;
-                    case 312434:
-                        sheet.Cells[row, 1, row, 19].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                        sheet.Cells[row, 1, row, 19].Style.Fill.BackgroundColor.SetColor(Color.Yellow);
-                        break;*/
                     case 200602:
                         sheet.Cells[row, 1, row, 19].Style.Fill.PatternType = ExcelFillStyle.Solid;
                         sheet.Cells[row, 1, row, 19].Style.Fill.BackgroundColor.SetColor(ViewHelpers.ColorAbend);
