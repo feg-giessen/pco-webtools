@@ -110,7 +110,7 @@ namespace PcoWeb.Export
                 4.5F,        // kollekte
                 4.5F,        // cd/www
                 3.458F,      // bistro
-                3.458F       // deko
+                PersonWidth  // deko
             });
 
             foreach (var cell in table.GetRow(0).GetCells())

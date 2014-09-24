@@ -165,7 +165,7 @@ namespace PcoWeb.Models
         {
             get
             {
-                return this.GetPlanNote("Deko");
+                return this.GetPlanPeople("Deko", string.Empty);
             }
         }
 

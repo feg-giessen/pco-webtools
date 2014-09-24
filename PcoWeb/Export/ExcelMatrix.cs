@@ -65,7 +65,7 @@ namespace PcoWeb.Export
             sheet.Cells[row, 18].Value = "Bistro";
             sheet.Column(18).Width = 7;
             sheet.Cells[row, 19].Value = "Deko";
-            sheet.Column(19).Width = 7;
+            sheet.Column(19).Width = 13;
 
             row++;
 
