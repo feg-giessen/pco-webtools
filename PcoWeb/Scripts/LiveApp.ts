@@ -1,18 +1,32 @@
-﻿/// <reference path="typings/jquery/jquery.d.ts" />
+﻿/// <reference path="typings/jquery/jquery.d.ts" /> 
 
-var LiveApp = (function () {
-    function LiveApp() {
-        this.songs = [];
-        this.items = [];
-        this.elements = {
-            clock_current: null,
-            clock_pre: null,
-            clock_past: null,
-            live_tag: null,
-            offset_tag: null
-        };
+interface ISong {
+    itemid: string;
+    b: JQuery;
+    e: JQuery;
+}
+
+interface IEventItem {
+    e: JQuery;
+    offset: number;
+}
+
+class LiveApp {
+    private songs: Array<ISong> = [];
+    private items: Array<IEventItem> = [];
+    private serviceDate: Date;
+    private serviceEnd: Date;
+    private serviceTimeOffset: number;
+
+    private elements = {
+        clock_current: null,
+        clock_pre: null,
+        clock_past: null,
+        live_tag: null,
+        offset_tag: null
     }
-    LiveApp.prototype.toggleSong = function (songElement, itemid) {
+
+    public toggleSong(songElement, itemid) {
         if (songElement.is(':visible')) {
             songElement.slideUp();
             localStorage.setItem('song_' + itemid, "0");
@@ -20,45 +34,44 @@ var LiveApp = (function () {
             songElement.slideDown();
             localStorage.removeItem('song_' + itemid);
         }
-    };
+    }
 
-    LiveApp.prototype.hideSongs = function () {
-        $.each(this.songs, function (i, song) {
+    public hideSongs() {
+        $.each(this.songs, (i, song) => {
             if (song.e.is(':visible')) {
                 song.e.slideUp();
                 localStorage.setItem('song_' + song.itemid, "0");
             }
         });
-    };
+    }
 
-    LiveApp.prototype.showSongs = function () {
-        $.each(this.songs, function (i, song) {
+    public showSongs() {
+        $.each(this.songs, (i, song) => {
             if (!song.e.is(':visible')) {
                 song.e.slideDown();
                 localStorage.removeItem('song_' + song.itemid);
             }
         });
-    };
+    }
 
-    LiveApp.prototype.init = function () {
-        var _this = this;
+    public init () {
         var songElements = $('.song-details');
 
-        $.each(songElements, function (i, songElement) {
+        $.each(songElements, (i, songElement: JQuery) => {
             var $songElement = $(songElement);
             var itemtd = $songElement.parents('td');
             var b = itemtd.find('.song-toggle');
 
-            var song = {
+            var song: ISong = {
                 itemid: $songElement.parents('tr').data('id'),
                 b: b,
                 e: $songElement
             };
 
-            _this.songs.push(song);
+            this.songs.push(song);
 
-            b.on('click', function () {
-                _this.toggleSong($songElement, song.itemid);
+            b.on('click', () => {
+                this.toggleSong($songElement, song.itemid);
             });
 
             if (localStorage.getItem('song_' + song.itemid) == 0) {
@@ -67,14 +80,14 @@ var LiveApp = (function () {
         });
 
         var items = $('table.live tbody tr');
-        $.each(items, function (i, itemElement) {
+        $.each(items, (i, itemElement) => {
             var $itemElement = $(itemElement);
-            var item = {
+            var item: IEventItem = {
                 e: $itemElement,
                 offset: parseInt($itemElement.data('time-offset'))
             };
 
-            _this.items.push(item);
+            this.items.push(item);
         });
 
         this.elements.clock_current = $('.plan-clock .current-clock');
@@ -82,16 +95,15 @@ var LiveApp = (function () {
         this.elements.clock_past = $('.plan-clock .in-service-clock');
         this.elements.live_tag = $('.live-tag');
         this.elements.offset_tag = $('.offset-tag');
-    };
+    }
 
-    LiveApp.prototype.updateTimes = function () {
-        var _this = this;
+    public updateTimes() {
         var d = new Date(Date.now());
         var h = d.getHours();
         var m = d.getMinutes();
         var s = d.getSeconds();
 
-        var hours;
+        var hours: number;
         var diff = 0;
 
         this.elements.clock_current.text((h < 10 ? '0' + h : h.toString()) + ':' + (m < 10 ? '0' + m : m.toString()) + ':' + (s < 10 ? '0' + s : s.toString()) + ' Uhr');
@@ -124,10 +136,14 @@ var LiveApp = (function () {
 
             var currentLive = null;
             var currentOffset = this.serviceTimeOffset + (diff / 1000);
-            $.each(this.items, function (i, item) {
+            $.each(this.items, (i, item) => {
                 item.e.removeClass('live');
-                if ((currentOffset < 0 && item.offset >= currentOffset) || (currentOffset > 0 && item.offset <= currentOffset)) {
-                    _this.elements.live_tag.css('height', (item.e.height() - 1) + 'px').css('top', (item.e.position().top + 1) + 'px').show();
+                if ((currentOffset < 0 && item.offset >= currentOffset)
+                    || (currentOffset > 0 && item.offset <= currentOffset)) {
+                    this.elements.live_tag
+                        .css('height', (item.e.height() - 1) + 'px')
+                        .css('top', (item.e.position().top + 1) + 'px')
+                        .show();
                     currentLive = item;
                 }
             });
@@ -145,12 +161,10 @@ var LiveApp = (function () {
                 }
             }
         }
-    };
-    return LiveApp;
-})();
+    }
+}
 
 var liveApp = new LiveApp();
-$(function () {
+$(() => {
     liveApp.init();
 });
-//# sourceMappingURL=LiveApp.js.map

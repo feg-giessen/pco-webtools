@@ -10,12 +10,14 @@ namespace PcoWeb
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
+            const string KendoVersion = "2014.1.318";
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/kendoui").Include(
-                        "~/Scripts/kendo/2013.3.1119/kendo.web.min.js",
-                        "~/Scripts/kendo/2013.3.1119/cultures/kendo.culture.de-DE.min.js"));
+                        "~/Scripts/kendo/" + KendoVersion + "/kendo.web.min.js",
+                        "~/Scripts/kendo/" + KendoVersion + "/cultures/kendo.culture.de-DE.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                         "~/Scripts/bootstrap.js"));
@@ -31,9 +33,9 @@ namespace PcoWeb
                 "~/Content/site.css",
                 "~/Content/Live.css");
 
-            css.Include("~/Content/kendo/2013.3.1119/kendo.common.min.css", new CssRewriteUrlTransform());
-            css.Include("~/Content/kendo/2013.3.1119/kendo.common-bootstrap.min.css", new CssRewriteUrlTransform());
-            css.Include("~/Content/kendo/2013.3.1119/kendo.default.min.css", new CssRewriteUrlTransform());
+            css.Include("~/Content/kendo/" + KendoVersion + "/kendo.common.min.css", new CssRewriteUrlTransform());
+            css.Include("~/Content/kendo/" + KendoVersion + "/kendo.common-bootstrap.min.css", new CssRewriteUrlTransform());
+            css.Include("~/Content/kendo/" + KendoVersion + "/kendo.default.min.css", new CssRewriteUrlTransform());
 
             bundles.Add(css);
         }

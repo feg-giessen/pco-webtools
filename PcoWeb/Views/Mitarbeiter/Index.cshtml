@@ -1,0 +1,29 @@
+﻿@using System.ComponentModel
+@model List<PcoBase.MinistryPositionsResult>
+@{
+    ViewBag.Title = "Index";
+
+    var gds = this.Model.GroupBy(x => x.Type == "ServiceType" ? x.Id : x.ServiceTypeId).OrderBy(x => x.Key);
+}
+
+<h2>Index</h2>
+
+@foreach (var group in gds)
+{
+    <ul>
+        <li>@group.Where(x => x.Type == "ServiceType").Select(x => x.Name).FirstOrDefault()</li>
+        @foreach (var catgory in group.GroupBy(x => x.CategoryName))
+        {
+            <li>
+                @catgory.First().CategoryName
+                <ul>
+                    @foreach (var pos in catgory)
+                    {
+                        <li>@pos.Position</li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+}
+

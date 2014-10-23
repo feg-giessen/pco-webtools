@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using PcoBase;
+
 namespace PcoWeb.Controllers
 {
     [Authorize]
@@ -14,8 +16,17 @@ namespace PcoWeb.Controllers
 
         public ActionResult Index()
         {
-            return View();
-        }
+            List<MinistryPositionsResult> ministryPositions = null;
 
+            if (PcoWebClient.IsAvailable(HomeController.Organization))
+            {
+                using (var web = new PcoWebClient())
+                {
+                    ministryPositions = web.GetMinistryPositions("Licht");
+                }
+            }
+
+            return this.View(ministryPositions);
+        }
     }
 }

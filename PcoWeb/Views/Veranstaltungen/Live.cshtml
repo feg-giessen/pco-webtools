@@ -132,27 +132,30 @@
         var serviceDate = new Date('@Model.StartTime.Value.ToUniversalTime().ToString("MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture) UTC'); @*// Tue, 1 Jan 2000 00:00:00 GMT*@
         var serviceEnd = new Date('@Model.EndTime.Value.ToUniversalTime().ToString("MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture) UTC'); @*// Tue, 1 Jan 2000 00:00:00 GMT*@
 
-        $(function () {
+        $(function() {
             liveApp.serviceDate = serviceDate;
             liveApp.serviceEnd = serviceEnd;
 
-            $('.plan-clock .actions .song-texts .js-hide').on('click', function (e) {
+            $('.plan-clock .actions .song-texts .js-hide').on('click', function(e) {
                 e.preventDefault();
                 liveApp.hideSongs();
             });
-            $('.plan-clock .actions .song-texts .js-show').on('click', function (e) {
+            $('.plan-clock .actions .song-texts .js-show').on('click', function(e) {
                 e.preventDefault();
                 liveApp.showSongs();
             });
-            setInterval(liveApp.updateTimes, 500);
+            setInterval(function() {
+                liveApp.updateTimes();
+            }, 500);
+        
 
-            var signalr = $.connection.liveHub;
-            signalr.client.offset = function (value) {
-                liveApp.serviceTimeOffset = value;
-            };
+        var signalr = $.connection.liveHub;
+        signalr.client.offset = function(value) {
+            liveApp.serviceTimeOffset = value;
+        };
 
-            $.connection.hub.start();
-            /*.done(function () {
+        $.connection.hub.start();
+        /*.done(function () {
                 $('#sendmessage').click(function () {
                     // Call the Send method on the hub. 
                     chat.server.send($('#displayname').val(), $('#message').val());
@@ -160,6 +163,6 @@
                     $('#message').val('').focus();
                 });
             });*/
-        });
+    });
     </script>
 }

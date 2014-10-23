@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
+
 using Newtonsoft.Json;
 
 namespace PcoBase
 {
+    [DebuggerDisplay("{Type}: {CategoryName}, {Name}")]
     public class MinistryPositionsResult
     {
         [JsonProperty("id")]
