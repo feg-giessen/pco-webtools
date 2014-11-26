@@ -38,7 +38,7 @@ namespace PcoWeb.Export
             sheet.Column(4).Width = 18;
             sheet.Cells[row, 5].Value = "Planung";
             sheet.Column(5).Width = 13;
-            sheet.Cells[row, 6].Value = "Moderation";
+            sheet.Cells[row, 6].Value = "Leitung";
             sheet.Column(6).Width = 13;
             sheet.Cells[row, 7].Value = "Ltg. Abendmahl";
             sheet.Column(7).Width = 13;

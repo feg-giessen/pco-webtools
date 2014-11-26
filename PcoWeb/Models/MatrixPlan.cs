@@ -49,7 +49,15 @@ namespace PcoWeb.Models
         {
             get
             {
-                string moderation = this.GetPlanPeople("Moderation", "Haupt");
+                string moderation = this.GetPlanPeople("Moderation", "01 Leitung (Moderation)");
+
+                if (string.IsNullOrWhiteSpace(moderation) || moderation == "#")
+                {
+                    string alt = this.GetPlanPeople("Moderation", "Haupt");
+
+                    if (alt != "#")
+                        return alt;
+                }
 
                 if (string.IsNullOrWhiteSpace(moderation) || moderation == "#")
                 {

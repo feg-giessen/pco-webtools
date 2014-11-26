@@ -74,7 +74,7 @@ namespace PcoWeb.Export
             table.AddCell(phraseFactory("Uhrzeit", header));
             table.AddCell(phraseFactory("Anlass", header));
             table.AddCell(phraseFactory("Planung", header));
-            table.AddCell(phraseFactory("Moderation", header));
+            table.AddCell(phraseFactory("Leitung", header));
             table.AddCell(phraseFactory("Ltg. Abendmahl", header));
             table.AddCell(phraseFactory("Verkündigung", header));
             table.AddCell(phraseFactory("Thema/Text", header));
