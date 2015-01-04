@@ -350,7 +350,8 @@ namespace PcoWeb.Models
                     }
                 }
 
-                partModel.AddText(stringBuilder.ToString());
+                if (partModel != null)
+                    partModel.AddText(stringBuilder.ToString());
             }
         }
 
