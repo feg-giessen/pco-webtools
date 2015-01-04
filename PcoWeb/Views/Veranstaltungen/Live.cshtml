@@ -112,6 +112,7 @@
     <div class="in-service-clock"></div>
     <h3>Aktionen</h3>
     <ul class="actions">
+        <li class="pco"><span class="icon btns"></span><a href="https://planningcenteronline.com/plans/@Model.Item.Id">Planning Center</a></li>
         <li class="song-texts"><span class="icon"></span>Texte <a class="js-show" href="#">auf</a>/<a class="js-hide" href="#">zu</a></li>
     </ul>
     <h3>Sänger</h3>
@@ -127,7 +128,7 @@
 {
     <script src="~/Scripts/jquery.signalR-2.0.2.min.js"></script>
     <script src="~/signalr/hubs"></script>
-    <script type="text/javascript" src="@Url.Content("~/scripts/LiveApp.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/LiveApp.js")"></script>
     <script>
         var serviceDate = new Date('@Model.StartTime.Value.ToUniversalTime().ToString("MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture) UTC'); @*// Tue, 1 Jan 2000 00:00:00 GMT*@
         var serviceEnd = new Date('@Model.EndTime.Value.ToUniversalTime().ToString("MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture) UTC'); @*// Tue, 1 Jan 2000 00:00:00 GMT*@

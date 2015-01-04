@@ -1,4 +1,4 @@
-body {
+﻿body {
   padding: 50px 0 0;
   color: #343631;
   font: 13px/1.5 "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
@@ -101,8 +101,14 @@ h6,
   top: 2px;
   background: url('pco_sprite.png') no-repeat transparent;
 }
+.sidebar .actions .icon.btns {
+  background-image: url('pco_btns.png');
+}
 .sidebar .actions .song-texts .icon {
   background-position: -42px -130px;
+}
+.sidebar .actions .pco .icon {
+  background-position: 0 -226px;
 }
 .sidebar ul {
   list-style: none;

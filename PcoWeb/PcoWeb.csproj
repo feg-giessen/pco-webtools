@@ -409,6 +409,7 @@
     <Content Include="Content\Live.min.css">
       <DependentUpon>Live.css</DependentUpon>
     </Content>
+    <Content Include="Content\pco_btns.png" />
     <Content Include="Content\pco_sprite.png" />
     <Content Include="AppSettings.Template.config" />
     <Content Include="ConnectionStrings.Template.config" />
@@ -523,7 +524,9 @@
     <Content Include="Scripts\kendo\2014.1.318\kendo.view.min.js" />
     <Content Include="Scripts\kendo\2014.1.318\kendo.web.min.js" />
     <Content Include="Scripts\kendo\2014.1.318\kendo.window.min.js" />
-    <Content Include="Scripts\LiveApp.js" />
+    <Content Include="Scripts\LiveApp.js">
+      <DependentUpon>LiveApp.ts</DependentUpon>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

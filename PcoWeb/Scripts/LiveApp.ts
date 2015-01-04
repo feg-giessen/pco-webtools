@@ -24,6 +24,10 @@ class LiveApp {
         clock_past: null,
         live_tag: null,
         offset_tag: null
+    };
+
+    constructor() {
+        this.serviceTimeOffset = 0;
     }
 
     public toggleSong(songElement, itemid) {

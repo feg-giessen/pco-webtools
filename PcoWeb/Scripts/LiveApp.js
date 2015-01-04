@@ -11,6 +11,7 @@ var LiveApp = (function () {
             live_tag: null,
             offset_tag: null
         };
+        this.serviceTimeOffset = 0;
     }
     LiveApp.prototype.toggleSong = function (songElement, itemid) {
         if (songElement.is(':visible')) {
