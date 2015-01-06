@@ -26,7 +26,16 @@ namespace PcoWeb.Controllers
             var service = new Service(AuthConfig.ConsumerKey, AuthConfig.ConsumerSecret);
             
             Organization org = service.GetOrganisation();
-            var personNames = new PersonNameService(service.GetPersons());
+            IList<Person> persons = null;
+            try
+            {
+                persons = service.GetPersons();
+            }
+            catch (WebException)
+            {
+                persons = new List<Person>();
+            }
+            var personNames = new PersonNameService(persons);
 
             if (model == null)
             {
@@ -164,7 +173,6 @@ namespace PcoWeb.Controllers
                 web.Login();
 
                 var org = web.GetOrganisation();
-                var personNames = new PersonNameService(web.GetPersons());
 
                 IEnumerable<string> serviceTypes = ConfigurationManager.AppSettings["FilePostServiceTypes"].Split(',');
 
@@ -179,6 +187,17 @@ namespace PcoWeb.Controllers
                         .Where(p => p.Date.HasValue && p.Date >= quartal.Start && p.Date <= quartal.End)
                         .Select(p => web.GetPlan(p.Plan.Id)));
                 }
+                
+                IList<Person> persons = null;
+                try
+                {
+                    persons = web.GetPersons();
+                }
+                catch (WebException)
+                {
+                    persons = new List<Person>();
+                }
+                var personNames = new PersonNameService(persons);
 
                 var planModels = plans.Select(p => new MatrixPlan(p, personNames)).OrderBy(p => p.Date).ToList();
 

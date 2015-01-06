@@ -210,7 +210,7 @@ namespace PcoWeb.Models
                 this.plan.PlanPeople
                     .Where(pp => pp.CategoryName == category && pp.Position.IndexOf(position, StringComparison.InvariantCultureIgnoreCase) > -1)
                     .Where(pp => pp.Status != "D")  // exclude declined
-                    .Select(p => this.personNames.GetName(p.PersonId)));
+                    .Select(p => this.personNames.GetName(p.PersonId) ?? this.FormatName(p.PersonName)));
 
             if (string.IsNullOrWhiteSpace(people))
             {
