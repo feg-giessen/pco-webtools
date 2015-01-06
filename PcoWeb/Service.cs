@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -24,6 +23,7 @@ namespace PcoWeb
         private const string PlanLink = "https://www.planningcenteronline.com/plans/{0}.json";
         private const string SongLink = "https://www.planningcenteronline.com/songs/{0}.json";
         private const string ArrangementLink = "https://www.planningcenteronline.com/arrangements/{0}.json";
+        private const string PersonsLink = "https://www.planningcenteronline.com/people.json";
 
         public Service(string appId, string appSecret)
         {
@@ -61,19 +61,8 @@ namespace PcoWeb
 
             var organizationEndpoint = new MessageReceivingEndpoint(OrganizationLink, HttpDeliveryMethods.GetRequest);
             HttpWebRequest request = c.PrepareAuthorizedRequest(organizationEndpoint, this.AccessToken);
-            
-            string jsonResponse;
 
-            using (WebResponse profileResponse = request.GetResponse())
-            {
-                using (Stream responseStream = profileResponse.GetResponseStream())
-                {
-                    using (var streamReader = new StreamReader(responseStream))
-                    {
-                        jsonResponse = streamReader.ReadToEnd();
-                    }
-                }
-            }
+            string jsonResponse = this.ExecuteRequest(request);
 
             return JsonConvert.DeserializeObject<Organization>(jsonResponse);
         }
@@ -85,18 +74,7 @@ namespace PcoWeb
             var plansEndpoint = new MessageReceivingEndpoint(string.Format(PlansLink, serviceType) + (all ? "?all=true" : string.Empty), HttpDeliveryMethods.GetRequest);
             HttpWebRequest request = c.PrepareAuthorizedRequest(plansEndpoint, this.AccessToken);
 
-            string jsonResponse;
-
-            using (WebResponse profileResponse = request.GetResponse())
-            {
-                using (Stream responseStream = profileResponse.GetResponseStream())
-                {
-                    using (var streamReader = new StreamReader(responseStream))
-                    {
-                        jsonResponse = streamReader.ReadToEnd();
-                    }
-                }
-            }
+            string jsonResponse = this.ExecuteRequest(request);
 
             return JsonConvert.DeserializeObject<List<PlanIndex>>(jsonResponse);
         }
@@ -108,18 +86,7 @@ namespace PcoWeb
             var planEndpoint = new MessageReceivingEndpoint(string.Format(PlanLink, planId), HttpDeliveryMethods.GetRequest);
             HttpWebRequest request = c.PrepareAuthorizedRequest(planEndpoint, this.AccessToken);
 
-            string jsonResponse;
-
-            using (WebResponse profileResponse = request.GetResponse())
-            {
-                using (Stream responseStream = profileResponse.GetResponseStream())
-                {
-                    using (var streamReader = new StreamReader(responseStream))
-                    {
-                        jsonResponse = streamReader.ReadToEnd();
-                    }
-                }
-            }
+            string jsonResponse = this.ExecuteRequest(request);
 
             return JsonConvert.DeserializeObject<Plan>(jsonResponse);
         }
@@ -131,18 +98,7 @@ namespace PcoWeb
             var planEndpoint = new MessageReceivingEndpoint(string.Format(SongLink, songId), HttpDeliveryMethods.GetRequest);
             HttpWebRequest request = c.PrepareAuthorizedRequest(planEndpoint, this.AccessToken);
 
-            string jsonResponse;
-
-            using (WebResponse profileResponse = request.GetResponse())
-            {
-                using (Stream responseStream = profileResponse.GetResponseStream())
-                {
-                    using (var streamReader = new StreamReader(responseStream))
-                    {
-                        jsonResponse = streamReader.ReadToEnd();
-                    }
-                }
-            }
+            string jsonResponse = this.ExecuteRequest(request);
 
             return JsonConvert.DeserializeObject<Song>(jsonResponse);
         }
@@ -154,18 +110,7 @@ namespace PcoWeb
             var planEndpoint = new MessageReceivingEndpoint(string.Format(ArrangementLink, id), HttpDeliveryMethods.GetRequest);
             HttpWebRequest request = c.PrepareAuthorizedRequest(planEndpoint, this.AccessToken);
 
-            string jsonResponse;
-
-            using (WebResponse profileResponse = request.GetResponse())
-            {
-                using (Stream responseStream = profileResponse.GetResponseStream())
-                {
-                    using (var streamReader = new StreamReader(responseStream))
-                    {
-                        jsonResponse = streamReader.ReadToEnd();
-                    }
-                }
-            }
+            string jsonResponse = this.ExecuteRequest(request);
 
             return JsonConvert.DeserializeObject<Arrangement>(jsonResponse);
         }
@@ -181,20 +126,38 @@ namespace PcoWeb
                 HttpDeliveryMethods.GetRequest);
             HttpWebRequest request = c.PrepareAuthorizedRequest(endpoint, this.AccessToken);
 
-            string jsonResponse;
+            string jsonResponse = this.ExecuteRequest(request);
 
+            return JsonConvert.DeserializeObject<List<MinistryPositionsResult>>(jsonResponse);
+        }
+
+        public IList<Person> GetPersons()
+        {
+            var c = new WebConsumer(PcoOauthClient.PcoServiceDescription, this.tokenManager);
+
+            var plansEndpoint = new MessageReceivingEndpoint(PersonsLink, HttpDeliveryMethods.GetRequest);
+            HttpWebRequest request = c.PrepareAuthorizedRequest(plansEndpoint, this.AccessToken);
+
+            string jsonResponse = this.ExecuteRequest(request);
+
+            return JsonConvert.DeserializeObject<PersonsResponse>(jsonResponse).People;
+        }
+
+        private string ExecuteRequest(HttpWebRequest request)
+        {
             using (WebResponse profileResponse = request.GetResponse())
             {
                 using (Stream responseStream = profileResponse.GetResponseStream())
                 {
+                    if (responseStream == null)
+                        return null;
+
                     using (var streamReader = new StreamReader(responseStream))
                     {
-                        jsonResponse = streamReader.ReadToEnd();
+                        return streamReader.ReadToEnd();
                     }
                 }
             }
-
-            return JsonConvert.DeserializeObject<List<MinistryPositionsResult>>(jsonResponse);
         }
     }
 }

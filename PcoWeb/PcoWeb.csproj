@@ -218,6 +218,7 @@
     <Compile Include="Models\DienstplanMatrixModel.cs" />
     <Compile Include="Models\LivePlanModel.cs" />
     <Compile Include="Models\MatrixPlan.cs" />
+    <Compile Include="Models\PersonNameService.cs" />
     <Compile Include="Models\ViewHelpers.cs" />
     <Compile Include="PcoOauthClient.cs" />
     <Compile Include="PcoWebClient.cs" />

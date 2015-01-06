@@ -80,4 +80,10 @@ namespace PcoBase
         [JsonProperty("ical_code")]
 		public string IcalCode { get; set; }
     }
+
+    public class PersonsResponse
+    {
+        [JsonProperty("people")]
+        public List<Person> People { get; set; } 
+    }
 }

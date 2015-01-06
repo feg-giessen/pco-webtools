@@ -13,12 +13,17 @@ namespace PcoWeb.Models
     {
         private readonly Plan plan;
 
-        public MatrixPlan(Plan plan)
+        private readonly PersonNameService personNames;
+
+        public MatrixPlan(Plan plan, PersonNameService personNames)
         {
             if (plan == null)
                 throw new ArgumentNullException("plan");
+            if (personNames == null)
+                throw new ArgumentNullException("personNames");
 
             this.plan = plan;
+            this.personNames = personNames;
             this.Date = DateTime.Parse(plan.ServiceTimes.First(t => t.TimeType == "Service").StartsAtUnformatted.Replace(" +0000", string.Empty));
         }
 
@@ -205,7 +210,7 @@ namespace PcoWeb.Models
                 this.plan.PlanPeople
                     .Where(pp => pp.CategoryName == category && pp.Position.IndexOf(position, StringComparison.InvariantCultureIgnoreCase) > -1)
                     .Where(pp => pp.Status != "D")  // exclude declined
-                    .Select(p => this.FormatName(p.PersonName)));
+                    .Select(p => this.personNames.GetName(p.PersonId)));
 
             if (string.IsNullOrWhiteSpace(people))
             {

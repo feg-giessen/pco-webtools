@@ -20,6 +20,8 @@ namespace PcoWeb
 
         private const string OrganizationLink = "https://www.planningcenteronline.com/organization.json";
 
+        private const string PersonsLink = "https://www.planningcenteronline.com/people.json";
+
         private readonly CookieContainer cookies;
 
         private bool disposed;
@@ -95,6 +97,13 @@ namespace PcoWeb
             var content = this.Get(string.Format(PlanLink, planId));
 
             return JsonConvert.DeserializeObject<Plan>(content);
+        }
+
+        public IList<Person> GetPersons()
+        {
+            var content = this.Get(PersonsLink);
+
+            return JsonConvert.DeserializeObject<PersonsResponse>(content).People;
         }
 
         public List<MinistryPositionsResult> GetMinistryPositions(string query)

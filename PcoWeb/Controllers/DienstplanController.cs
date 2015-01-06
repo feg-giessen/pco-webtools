@@ -24,8 +24,9 @@ namespace PcoWeb.Controllers
         public ActionResult Index(DienstplanMatrixModel model, string type)
         {
             var service = new Service(AuthConfig.ConsumerKey, AuthConfig.ConsumerSecret);
-
+            
             Organization org = service.GetOrganisation();
+            var personNames = new PersonNameService(service.GetPersons());
 
             if (model == null)
             {
@@ -71,7 +72,7 @@ namespace PcoWeb.Controllers
                         .Select(p => service.GetPlan(p.Plan.Id)));
                 }
 
-                var planModels = plans.Select(p => new MatrixPlan(p)).OrderBy(p => p.Date).ToList();
+                var planModels = plans.Select(p => new MatrixPlan(p, personNames)).OrderBy(p => p.Date).ToList();
 
                 Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("de-DE");
 
@@ -163,6 +164,7 @@ namespace PcoWeb.Controllers
                 web.Login();
 
                 var org = web.GetOrganisation();
+                var personNames = new PersonNameService(web.GetPersons());
 
                 IEnumerable<string> serviceTypes = ConfigurationManager.AppSettings["FilePostServiceTypes"].Split(',');
 
@@ -178,7 +180,7 @@ namespace PcoWeb.Controllers
                         .Select(p => web.GetPlan(p.Plan.Id)));
                 }
 
-                var planModels = plans.Select(p => new MatrixPlan(p)).OrderBy(p => p.Date).ToList();
+                var planModels = plans.Select(p => new MatrixPlan(p, personNames)).OrderBy(p => p.Date).ToList();
 
                 uploadParams.Add("year", quartal.Year.ToString());
                 uploadParams.Add("quartal", quartal.Nummer.ToString());
