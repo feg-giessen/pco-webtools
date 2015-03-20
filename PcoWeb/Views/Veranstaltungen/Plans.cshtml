@@ -15,7 +15,7 @@
         var date = ViewHelpers.FormtatedDate(item.Dates);
         if (date.HasValue)
         {
-            <li>@Html.ActionLink(date.Value.ToString("dd. MMMM yyyy", cultureInfo), "Live", new { id = item.Id })</li>
+            <li>@Html.ActionLink(date.Value.ToString("dd. MMMM yyyy", cultureInfo) + " - " + item.PlanTitle, "Live", new { id = item.Id })</li>
         }
     }
 </ul>
