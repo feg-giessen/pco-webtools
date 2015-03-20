@@ -18,13 +18,13 @@ namespace PcoBase
 		public string OwnerName { get; set; }
 
         [JsonProperty("music_stand_enabled")]
-		public bool MusicStandEnabled { get; set; }
+		public bool? MusicStandEnabled { get; set; }
 
         [JsonProperty("projector_enabled")]
-		public object ProjectorEnabled { get; set; }
+        public bool? ProjectorEnabled { get; set; }
 
         [JsonProperty("ccli_connected")]
-		public bool CcliConnected { get; set; }
+        public bool? CcliConnected { get; set; }
 
         [JsonProperty("secret")]
 		public int Secret { get; set; }
