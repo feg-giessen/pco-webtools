@@ -186,7 +186,8 @@ namespace PcoWeb.Models
         {
             get
             {
-                return this.GetPlanNote("Aufnahme/Vervielfältigung");
+                return this.GetPlanNote("Aufnahme/Vervielfältigung")
+                    ?? this.GetPlanNote("Vervielfältigung");
             }
         }
 
