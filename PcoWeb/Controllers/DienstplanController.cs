@@ -166,7 +166,6 @@ namespace PcoWeb.Controllers
             string url = ConfigurationManager.AppSettings["FilePostUrl"];
 
             var uploadParams = new Dictionary<string, object>();
-            byte[] file;
 
             using (var web = new PcoWebClient())
             {
@@ -201,19 +200,25 @@ namespace PcoWeb.Controllers
 
                 var planModels = plans.Select(p => new MatrixPlan(p, personNames)).OrderBy(p => p.Date).ToList();
 
-                uploadParams.Add("year", quartal.Year.ToString());
-                uploadParams.Add("quartal", quartal.Nummer.ToString());
+                uploadParams.Add("year", quartal.Year.ToString(CultureInfo.InvariantCulture));
+                uploadParams.Add("quartal", quartal.Nummer.ToString(CultureInfo.InvariantCulture));
 
-                file = PdfMatrix.Generate(org, quartal.Start, quartal.End, planModels, false);
-                string a4Hash = ByteArrayToHexString(MD5CryptoServiceProvider.Create().ComputeHash(file));
-                uploadParams.Add("a4", new FormUpload.FileParameter(file, "Dienstplan_A4", "application/pdf"));
+                using (var md5 = MD5.Create())
+                {
+                    byte[] file;
 
-                file = PdfMatrix.Generate(org, quartal.Start, quartal.End, planModels, true);
-                string a3Hash = ByteArrayToHexString(MD5CryptoServiceProvider.Create().ComputeHash(file));
-                uploadParams.Add("a3", new FormUpload.FileParameter(file, "Dienstplan_A3", "application/pdf"));
+                    file = PdfMatrix.Generate(org, quartal.Start, quartal.End, planModels, false);
+                    string a4Hash = ByteArrayToHexString(md5.ComputeHash(file));
+                    uploadParams.Add("a4", new FormUpload.FileParameter(file, "Dienstplan_A4", "application/pdf"));
 
-                uploadParams.Add("data", ByteArrayToHexString(
-                    MD5CryptoServiceProvider.Create().ComputeHash(ASCIIEncoding.ASCII.GetBytes(quartal.Year.ToString() + quartal.Nummer + key + a4Hash + a3Hash))));
+                    file = PdfMatrix.Generate(org, quartal.Start, quartal.End, planModels, true);
+                    string a3Hash = ByteArrayToHexString(md5.ComputeHash(file));
+                    uploadParams.Add("a3", new FormUpload.FileParameter(file, "Dienstplan_A3", "application/pdf"));
+
+                    uploadParams.Add(
+                        "data",
+                        ByteArrayToHexString(md5.ComputeHash(Encoding.ASCII.GetBytes(quartal.Year.ToString(CultureInfo.InvariantCulture) + quartal.Nummer + key + a4Hash + a3Hash))));
+                }
 
                 return FormUpload.MultipartFormDataPost(url, "feggiessen-pco.azurewebsites.net", uploadParams);
             }
@@ -221,9 +226,13 @@ namespace PcoWeb.Controllers
 
         public static string ByteArrayToHexString(byte[] ba)
         {
-            StringBuilder hex = new StringBuilder(ba.Length * 2);
+            var hex = new StringBuilder(ba.Length * 2);
+
             foreach (byte b in ba)
+            {
                 hex.AppendFormat("{0:x2}", b);
+            }
+
             return hex.ToString();
         }
 
