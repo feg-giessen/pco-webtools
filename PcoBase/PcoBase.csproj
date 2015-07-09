@@ -44,6 +44,8 @@
     <Compile Include="Address.cs" />
     <Compile Include="Arrangement.cs" />
     <Compile Include="Attachement.cs" />
+    <Compile Include="LivePlan.cs" />
+    <Compile Include="LiveStatus.cs" />
     <Compile Include="PlanItemArrangement.cs" />
     <Compile Include="CategoryReminders.cs" />
     <Compile Include="ContactData.cs" />

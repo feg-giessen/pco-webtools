@@ -24,6 +24,12 @@ namespace PcoWeb
         private const string SongLink = "https://www.planningcenteronline.com/songs/{0}.json";
         private const string ArrangementLink = "https://www.planningcenteronline.com/arrangements/{0}.json";
         private const string PersonsLink = "https://www.planningcenteronline.com/people.json";
+        
+        private const string LivePlanLink = "https://services.planningcenteronline.com/live/{0}.json";
+        private const string LivePlanControlLink = "https://services.planningcenteronline.com/live/{0}/control.json";
+        private const string LivePlanMoveLink = "https://services.planningcenteronline.com/live/{0}/move.json";
+        private const string LivePlanPreviousLink = "https://services.planningcenteronline.com/live/{0}/previous.json";
+        private const string LivePlanNextLink = "https://services.planningcenteronline.com/live/{0}/next.json";
 
         public Service(string appId, string appSecret)
         {
@@ -141,6 +147,18 @@ namespace PcoWeb
             string jsonResponse = this.ExecuteRequest(request);
 
             return JsonConvert.DeserializeObject<PersonsResponse>(jsonResponse).People;
+        }
+
+        public LivePlan GetLivePlan(int id)
+        {
+            var c = new WebConsumer(PcoOauthClient.PcoServiceDescription, this.tokenManager);
+
+            var planEndpoint = new MessageReceivingEndpoint(string.Format(LivePlanLink, id), HttpDeliveryMethods.GetRequest);
+            HttpWebRequest request = c.PrepareAuthorizedRequest(planEndpoint, this.AccessToken);
+
+            string jsonResponse = this.ExecuteRequest(request);
+
+            return JsonConvert.DeserializeObject<LivePlan>(jsonResponse);
         }
 
         private string ExecuteRequest(HttpWebRequest request)
