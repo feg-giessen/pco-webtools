@@ -34,6 +34,57 @@ namespace PcoWeb.Controllers
                 });
         }
 
+        public ActionResult Auswertung()
+        {
+            var service = new Service(AuthConfig.ConsumerKey, AuthConfig.ConsumerSecret);
+            
+            var plansMorgen = service.GetPlans(308904, true);
+            var plansAbend = service.GetPlans(200602, true);
+
+            var startDate = new DateTime(2000, 1, 1);
+
+            var morgenListe = new List<PlanAuswertungModel>();
+            var abendListe = new List<PlanAuswertungModel>();
+
+            Func<PlanIndex, bool> planSelector = p =>
+            {
+                var date = ViewHelpers.FormtatedDate(p.Dates);
+                return date.HasValue && date.Value >= startDate && date.Value < DateTime.Now;
+            };
+
+            foreach (var op in plansMorgen.Where(planSelector))
+            {
+                Plan plan = service.GetPlan(op.Id);
+                var model = new LivePlanModel(plan, i => null);
+
+                morgenListe.Add(WerteAus(model));
+            }
+
+            foreach (var op in plansAbend.Where(planSelector))
+            {
+                Plan plan = service.GetPlan(op.Id);
+                var model = new LivePlanModel(plan, i => null);
+
+                abendListe.Add(WerteAus(model));
+            }
+
+            return this.View(new AuswertungModel
+            {
+                Morgens = morgenListe,
+                Abends = abendListe
+            });
+        }
+
+        private static PlanAuswertungModel WerteAus(LivePlanModel model)
+        {
+            return new PlanAuswertungModel
+            {
+                Date = model.StartTime.Value.Date,
+                Band = model.Items.Where(i => !i.Item.IsPostservice && !i.Item.IsPreservice && (i.ItemType == PlanItemType.Song || i.Akteur == "Band")).Sum(i => i.Item.Length),
+                NichtBand = model.Items.Where(i => !i.Item.IsPostservice && !i.Item.IsPreservice && i.ItemType != PlanItemType.Song && i.Akteur != "Band").Sum(i => i.Item.Length)
+            };
+        }
+
         public ActionResult Plan(int id)
         {
             var service = new Service(AuthConfig.ConsumerKey, AuthConfig.ConsumerSecret);

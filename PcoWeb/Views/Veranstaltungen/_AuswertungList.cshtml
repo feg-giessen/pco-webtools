@@ -1,0 +1,15 @@
+﻿@model List<PcoWeb.Models.PlanAuswertungModel>
+<table>
+    <thead>
+        <tr><th>Datum</th><th>Mod</th><th>Band</th><th>Band %</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr><td>@item.Date.ToString("dddd, dd.MM.yyyy – HH:mm")</td><td>@((item.NichtBand / 60).ToString("0.00")) Min.</td><td>@((item.Band / 60).ToString("0.00")) Min.</td><td>@(item.BandProzent.HasValue ? item.BandProzent.Value.ToString("0.00 %") : string.Empty)</td></tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr><th></th><th></th><th></th><th>@((Model.Sum(m => m.Band) / (Model.Sum(m => m.Band) + Model.Sum(m => m.NichtBand))).ToString("0.00 %"))</th></tr>
+    </tfoot>
+</table>

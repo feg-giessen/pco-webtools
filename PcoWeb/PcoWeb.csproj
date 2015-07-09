@@ -215,10 +215,12 @@
     </Compile>
     <Compile Include="Hubs\LiveHub.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AuswertungModel.cs" />
     <Compile Include="Models\DienstplanMatrixModel.cs" />
     <Compile Include="Models\LivePlanModel.cs" />
     <Compile Include="Models\MatrixPlan.cs" />
     <Compile Include="Models\PersonNameService.cs" />
+    <Compile Include="Models\PlanAuswertungModel.cs" />
     <Compile Include="Models\ViewHelpers.cs" />
     <Compile Include="PcoOauthClient.cs" />
     <Compile Include="PcoWebClient.cs" />
@@ -617,6 +619,8 @@
     <Content Include="Scripts\kendo\2014.1.318\kendo.autocomplete.min.js.map" />
     <Content Include="Scripts\kendo\2014.1.318\jquery.min.map" />
     <Content Include="Views\Mitarbeiter\Index.cshtml" />
+    <Content Include="Views\Veranstaltungen\Auswertung.cshtml" />
+    <Content Include="Views\Veranstaltungen\_AuswertungList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
