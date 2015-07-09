@@ -6,19 +6,19 @@ namespace PcoBase
     public class Organization
     {
         [JsonProperty("id")]
-		public int Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("account_center_id")]
-		public int AccountCenterId { get; set; }
+        public int AccountCenterId { get; set; }
 
         [JsonProperty("name")]
-		public string Name { get; set; }
+        public string Name { get; set; }
 
         [JsonProperty("owner_name")]
-		public string OwnerName { get; set; }
+        public string OwnerName { get; set; }
 
         [JsonProperty("music_stand_enabled")]
-		public bool? MusicStandEnabled { get; set; }
+        public bool? MusicStandEnabled { get; set; }
 
         [JsonProperty("projector_enabled")]
         public bool? ProjectorEnabled { get; set; }
@@ -27,24 +27,24 @@ namespace PcoBase
         public bool? CcliConnected { get; set; }
 
         [JsonProperty("secret")]
-		public int Secret { get; set; }
+        public int Secret { get; set; }
 
         [JsonProperty("date_format")]
-		public int DateFormat { get; set; }
+        public int DateFormat { get; set; }
 
         [JsonProperty("twenty_four_hour_time")]
-		public bool TwentyFourHourTime { get; set; }
+        public bool TwentyFourHourTime { get; set; }
 
         [JsonProperty("total_songs")]
-		public int TotalSongs { get; set; }
+        public int TotalSongs { get; set; }
 
         [JsonProperty("total_people")]
-		public int TotalPeople { get; set; }
+        public int TotalPeople { get; set; }
 
         [JsonProperty("service_types")]
-		public List<ServiceType> ServiceTypes { get; set; }
+        public List<ServiceType> ServiceTypes { get; set; }
 
         [JsonProperty("service_type_folders")]
-		public List<ServiceTypeFolder> ServiceTypeFolders { get; set; }
+        public List<ServiceTypeFolder> ServiceTypeFolders { get; set; }
     }
 }

@@ -9,69 +9,69 @@ namespace PcoBase
     public class MinistryPositionsResult
     {
         [JsonProperty("id")]
-		public int Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("name")]
-		public string Name { get; set; }
+        public string Name { get; set; }
 
         [JsonProperty("parent_id")]
-		public int ParentId { get; set; }
+        public int ParentId { get; set; }
 
         [JsonProperty("type")]
-		public string Type { get; set; }
+        public string Type { get; set; }
 
         [JsonProperty("container")]
-		public string Container { get; set; }
+        public string Container { get; set; }
 
         [JsonProperty("container_id")]
-		public object ContainerId { get; set; }
+        public object ContainerId { get; set; }
 
         [JsonProperty("sequence")]
-		public int? Sequence { get; set; }
+        public int? Sequence { get; set; }
 
         [JsonProperty("attachment_types_enabled")]
-		public bool AttachmentTypesEnabled { get; set; }
+        public bool AttachmentTypesEnabled { get; set; }
 
         [JsonProperty("permissions")]
-		public string Permissions { get; set; }
+        public string Permissions { get; set; }
 
         [JsonProperty("ministry_id")]
-		public int? MinistryId { get; set; }
+        public int? MinistryId { get; set; }
 
         [JsonProperty("service_type_id")]
-		public int? ServiceTypeId { get; set; }
+        public int? ServiceTypeId { get; set; }
 
         [JsonProperty("service_type")]
-		public string ServiceType { get; set; }
+        public string ServiceType { get; set; }
 
         [JsonProperty("name_for_data_attr")]
-		public string NameForDataAttr { get; set; }
+        public string NameForDataAttr { get; set; }
 
         [JsonProperty("scheduled_viewers_see")]
-		public int? ScheduledViewersSee { get; set; }
+        public int? ScheduledViewersSee { get; set; }
 
         [JsonProperty("category_id")]
-		public int? CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
         [JsonProperty("properties")]
-		public Properties Properties { get; set; }
+        public Properties Properties { get; set; }
 
         [JsonProperty("attachment_type_ids")]
-		public List<string> AttachmentTypeIds { get; set; }
+        public List<string> AttachmentTypeIds { get; set; }
 
         [JsonProperty("category_name")]
-		public string CategoryName { get; set; }
+        public string CategoryName { get; set; }
 
         [JsonProperty("category_sequence")]
-		public int? CategorySequence { get; set; }
+        public int? CategorySequence { get; set; }
 
         [JsonProperty("position")]
-		public string Position { get; set; }
+        public string Position { get; set; }
 
         [JsonProperty("quantity")]
-		public int? Quantity { get; set; }
+        public int? Quantity { get; set; }
 
         [JsonProperty("can_be_deleted")]
-		public bool? CanBeDeleted { get; set; }
+        public bool? CanBeDeleted { get; set; }
     }
 }

@@ -5,12 +5,12 @@ namespace PcoBase
     public class EmailAddress
     {
         [JsonProperty("id")]
-		public int Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("address")]
-		public string Address { get; set; }
+        public string Address { get; set; }
 
         [JsonProperty("location")]
-		public string Location { get; set; }
+        public string Location { get; set; }
     }
 }

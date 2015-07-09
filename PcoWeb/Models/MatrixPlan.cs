@@ -238,20 +238,20 @@ namespace PcoWeb.Models
         }
 
         /*
-         * Plan Notes: Anlass	
-         * Planung: Gottesdienstplanung	
-         * Moderation: 01 Hauptmoderation	
-         * Abendmahl: 02 Leitung	
-         * Plan Notes: Verkündigung	
-         * Plan Notes: Thema/Text	
-         * Musik: 01 Musikverantwortlicher	
-         * ???	
-         * Technik: Ton	
-         * Technik: Präsentation	
-         * Technik: Licht	
-         * "Plan Notes: Bes. Elemente" + "Plan Notes: Bemerkungen"	
-         * Plan Notes: Kollekte (Zweck)	
-         * "Plan Notes: Bistro" + "Plan Notes: Stammtisch" 	
+         * Plan Notes: Anlass    
+         * Planung: Gottesdienstplanung    
+         * Moderation: 01 Hauptmoderation    
+         * Abendmahl: 02 Leitung    
+         * Plan Notes: Verkündigung    
+         * Plan Notes: Thema/Text    
+         * Musik: 01 Musikverantwortlicher    
+         * ???    
+         * Technik: Ton    
+         * Technik: Präsentation    
+         * Technik: Licht    
+         * "Plan Notes: Bes. Elemente" + "Plan Notes: Bemerkungen"    
+         * Plan Notes: Kollekte (Zweck)    
+         * "Plan Notes: Bistro" + "Plan Notes: Stammtisch"     
          * Plan Notes: Deko (irgendwann auch über PCO organisiert)
         */
     }

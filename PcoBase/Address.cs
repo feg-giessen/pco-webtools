@@ -5,21 +5,21 @@ namespace PcoBase
     public class Address
     {
         [JsonProperty("id")]
-		public int Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("street")]
-		public string Street { get; set; }
+        public string Street { get; set; }
 
         [JsonProperty("city")]
-		public string City { get; set; }
+        public string City { get; set; }
 
         [JsonProperty("state")]
-		public string State { get; set; }
+        public string State { get; set; }
 
         [JsonProperty("zip")]
-		public string Zip { get; set; }
+        public string Zip { get; set; }
 
         [JsonProperty("location")]
-		public string Location { get; set; }
+        public string Location { get; set; }
     }
 }
