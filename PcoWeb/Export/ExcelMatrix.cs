@@ -20,7 +20,9 @@ namespace PcoWeb.Export
 
             var sheet = package.Workbook.Worksheets.Add("Dienstplan");
 
-            var title = sheet.Cells[1, 1, 1, 19];
+            const int ColumnCount = 20;
+
+            var title = sheet.Cells[1, 1, 1, ColumnCount];
             title.Merge = true;
             title.Value = string.Format("{2} – Gesamtdienstplan {0:dd.MM.}–{1:dd.MM.yyyy}", start, end, org.Name);
             title.Style.Font.Bold = true;
@@ -66,6 +68,8 @@ namespace PcoWeb.Export
             sheet.Column(18).Width = 7;
             sheet.Cells[row, 19].Value = "Deko";
             sheet.Column(19).Width = 13;
+            sheet.Cells[row, 20].Value = "Foyer";
+            sheet.Column(20).Width = 7;
 
             row++;
 
@@ -95,39 +99,40 @@ namespace PcoWeb.Export
                 sheet.Cells[row, 17].Value = plan.Aufnahme;
                 sheet.Cells[row, 18].Value = plan.Bistro;
                 sheet.Cells[row, 19].Value = plan.Deko;
+                sheet.Cells[row, 20].Value = plan.Foyerdienst;
 
                 switch (plan.Item.ServiceTypeId)
                 {
                     case 200602:
-                        sheet.Cells[row, 1, row, 19].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                        sheet.Cells[row, 1, row, 19].Style.Fill.BackgroundColor.SetColor(ViewHelpers.ColorAbend);
+                        sheet.Cells[row, 1, row, ColumnCount].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        sheet.Cells[row, 1, row, ColumnCount].Style.Fill.BackgroundColor.SetColor(ViewHelpers.ColorAbend);
                         break;
                     case 308904:
-                        sheet.Cells[row, 1, row, 19].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                        sheet.Cells[row, 1, row, 19].Style.Fill.BackgroundColor.SetColor(ViewHelpers.ColorMorgen);
+                        sheet.Cells[row, 1, row, ColumnCount].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        sheet.Cells[row, 1, row, ColumnCount].Style.Fill.BackgroundColor.SetColor(ViewHelpers.ColorMorgen);
                         break;
                     case 312434:
-                        sheet.Cells[row, 1, row, 19].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                        sheet.Cells[row, 1, row, 19].Style.Fill.BackgroundColor.SetColor(ViewHelpers.ColorBesondere);
+                        sheet.Cells[row, 1, row, ColumnCount].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        sheet.Cells[row, 1, row, ColumnCount].Style.Fill.BackgroundColor.SetColor(ViewHelpers.ColorBesondere);
                         break;
                 }
 
                 row++;
             }
 
-            var cellRange = sheet.Cells[2, 1, row - 1, 19];
+            var cellRange = sheet.Cells[2, 1, row - 1, ColumnCount];
 
             cellRange.Style.SetBorder(ExcelBorderStyle.Thin, Color.Black);
             cellRange.Style.Font.Name = "Arial";
             cellRange.Style.Font.Size = 10;
             cellRange.Style.WrapText = true;
 
-            var table = sheet.Tables.Add(sheet.Cells[2, 1, row - 1, 19], "DienstTable");
+            var table = sheet.Tables.Add(sheet.Cells[2, 1, row - 1, ColumnCount], "DienstTable");
             table.StyleName = "None";
             
-            sheet.Cells[2, 1, 2, 19].Style.Fill.PatternType = ExcelFillStyle.Solid;
-            sheet.Cells[2, 1, 2, 19].Style.Fill.BackgroundColor.SetColor(Color.LightGray);
-            sheet.Cells[2, 1, 2, 19].Style.Font.Bold = true;
+            sheet.Cells[2, 1, 2, ColumnCount].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            sheet.Cells[2, 1, 2, ColumnCount].Style.Fill.BackgroundColor.SetColor(Color.LightGray);
+            sheet.Cells[2, 1, 2, ColumnCount].Style.Font.Bold = true;
 
             var stream = new MemoryStream();
             package.SaveAs(stream);

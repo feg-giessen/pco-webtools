@@ -191,6 +191,14 @@ namespace PcoWeb.Models
             }
         }
 
+        public string Foyerdienst
+        {
+            get
+            {
+                return this.GetPlanNote("Foyer");
+            }
+        }
+
         private string FormatName(string name)
         {
             var regex = new Regex(@"(?<first>\w)\w* (?<last>\w+)");

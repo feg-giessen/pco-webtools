@@ -51,7 +51,7 @@ namespace PcoWeb.Export
 
             pdfdoc.Add(titleContent);
 
-            var table = new PdfPTable(19)
+            var table = new PdfPTable(20)
             {
                 WidthPercentage = 100,
                 HeaderRows = 1
@@ -88,6 +88,7 @@ namespace PcoWeb.Export
             table.AddCell(phraseFactory("CD/WWW", header));
             table.AddCell(phraseFactory("Bistro", header));
             table.AddCell(phraseFactory("Deko", header));
+            table.AddCell(phraseFactory("Foyer", header));
 
             const float PersonWidth = 6.423F;
 
@@ -110,7 +111,8 @@ namespace PcoWeb.Export
                 4.5F,        // kollekte
                 4.5F,        // cd/www
                 3.458F,      // bistro
-                PersonWidth  // deko
+                PersonWidth,  // deko
+                3.458F,      // foyer
             });
 
             foreach (var cell in table.GetRow(0).GetCells())
@@ -145,6 +147,7 @@ namespace PcoWeb.Export
                 table.AddCell(phraseFactory(plan.Aufnahme, cellFont));
                 table.AddCell(phraseFactory(plan.Bistro, cellFont));
                 table.AddCell(phraseFactory(plan.Deko, cellFont));
+                table.AddCell(phraseFactory(plan.Foyerdienst, cellFont));
                                 
                 switch (plan.Item.ServiceTypeId)
                 {
