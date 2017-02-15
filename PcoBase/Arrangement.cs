@@ -71,10 +71,10 @@ namespace PcoBase
         public string ChordChartFont { get; set; }
 
         [JsonProperty("chord_chart_columns")]
-        public int ChordChartColumns { get; set; }
+        public int? ChordChartColumns { get; set; }
 
         [JsonProperty("chord_chart_font_size")]
-        public int ChordChartFontSize { get; set; }
+        public int? ChordChartFontSize { get; set; }
 
         [JsonProperty("properties")]
         public List<Property> Properties { get; set; }
