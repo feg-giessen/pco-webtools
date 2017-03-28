@@ -22,6 +22,10 @@ namespace PcoWeb
 
         private const string PersonsLink = "https://www.planningcenteronline.com/people.json";
 
+        private const string PdfNewLink = "https://planningcenteronline.com/plans/{0}/print/new";
+
+        private const string PdfLink = "https://planningcenteronline.com/plans/{0}/print.pdf";
+
         private readonly CookieContainer cookies;
 
         private bool disposed;
@@ -74,6 +78,58 @@ namespace PcoWeb
         {
             this.Get(@"https://accounts.planningcenteronline.com/logout");
             this.login = false;
+        }
+
+        public byte[] Print(int id)
+        {
+            // https://planningcenteronline.com/plans/27766677/print/new
+            string content = this.Get(string.Format(PdfNewLink, id));
+
+            var match1 = Regex.Match(content, "name\\=\"authenticity_token\" value\\=\"(?<value>[^\"]+)\"", RegexOptions.IgnoreCase);
+            var match2 = Regex.Matches(content, @"time_(?<id>\d+)\[print\]", RegexOptions.IgnoreCase);
+            
+            if (match1.Success)
+            {
+                string token = match1.Groups["value"].Value;
+                
+                var values = new Dictionary<string, string>
+                {
+                    { "authenticity_token", token },
+                    { "ministry[print_to]", "pdf" },
+                    { "ministry[print_page_size]", "A4" },
+                    { "ministry[print_orientation]", "Portrait" },
+                    { "ministry[print_margin]", "0.25in" },
+                    { "ministry[print_font_size]", "8pt" },
+                    { "ministry[print_logo]", "0" },
+                    { "ministry[print_length]", "1" },
+                    { "ministry[print_item_detail]", "0" },
+                    { "ministry[print_in_color]", "0" },
+                    { "ministry[print_media]", "0" },
+                    { "ministry[print_rehearsal_times]", "0" },
+                    { "ministry[print_other_times]", "0" },
+                    { "show_items_without_times", "0" },
+                    { "ministry[print_sequences]", "1" },
+                    { "ministry[print_columns]", "true" }
+                };
+
+                string timeId = match2.OfType<Match>().Select(m => m.Groups["id"].Value).FirstOrDefault();
+                if (!string.IsNullOrEmpty(timeId))
+                {
+                    values.Add("time_" + timeId + "[print]", "1");
+                }
+
+                var match3 = Regex.Matches(content, @"ministry\[plan_item_note_categories\]\[(?<id>\d+)\]\[print\]", RegexOptions.IgnoreCase);
+                var categories = match3.OfType<Match>().Select(m => m.Groups["id"].Value).Distinct().ToList();
+
+                foreach (string catId in categories)
+                {
+                    values.Add("ministry[plan_item_note_categories][" + catId + "][print]", "1");
+                }
+
+                return this.PostByte(string.Format(PdfLink, id), values);
+            }
+
+            return new byte[0];
         }
 
         public Organization GetOrganisation()
@@ -183,6 +239,39 @@ namespace PcoWeb
                 using (var reader = new StreamReader(stream))
                 {
                     return reader.ReadToEnd();
+                }
+            }
+        }
+
+        private byte[] PostByte(string url, IDictionary<string, string> values)
+        {
+            var request = HttpWebRequest.CreateHttp(url);
+            this.ConfigureRequest(request);
+
+            request.Method = "POST";
+
+            string postData = string.Join(
+                "&",
+                values.Select(kv => string.Format("{0}={1}", HttpUtility.UrlEncode(kv.Key), HttpUtility.UrlEncode(kv.Value))));
+
+            byte[] data = Encoding.ASCII.GetBytes(postData);
+
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = data.Length;
+
+            Stream requestStream = request.GetRequestStream();
+            requestStream.Write(data, 0, data.Length);
+            requestStream.Close();
+
+            var response = request.GetResponse();
+
+            using (var stream = response.GetResponseStream())
+            {
+                using (var ms = new MemoryStream())
+                {
+                    stream.CopyTo(ms);
+
+                    return ms.ToArray();
                 }
             }
         }
