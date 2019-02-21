@@ -54,7 +54,7 @@ namespace PcoWeb.Models
         {
             get
             {
-                string moderation = this.GetPlanPeople("Moderation", "01 Leitung (Moderation)");
+                string moderation = this.GetPlanPeople("Moderation", "01 Moderation");
 
                 if (string.IsNullOrWhiteSpace(moderation) || moderation == "#")
                 {
