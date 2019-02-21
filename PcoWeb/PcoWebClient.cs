@@ -26,6 +26,8 @@ namespace PcoWeb
 
         private const string PdfLink = "https://planningcenteronline.com/plans/{0}/print.pdf";
 
+        private const string PdfRefererLink = "https://planningcenteronline.com/plans/{0}";
+
         private readonly CookieContainer cookies;
 
         private bool disposed;
@@ -126,7 +128,7 @@ namespace PcoWeb
                     values.Add("ministry[plan_item_note_categories][" + catId + "][print]", "1");
                 }
 
-                return this.PostByte(string.Format(PdfLink, id), values);
+                return this.PostByte(string.Format(PdfLink, id), values, string.Format(PdfRefererLink, id));
             }
 
             return new byte[0];
@@ -243,10 +245,15 @@ namespace PcoWeb
             }
         }
 
-        private byte[] PostByte(string url, IDictionary<string, string> values)
+        private byte[] PostByte(string url, IDictionary<string, string> values, string referer = null)
         {
             var request = HttpWebRequest.CreateHttp(url);
             this.ConfigureRequest(request);
+
+            if (!string.IsNullOrEmpty(referer))
+            {
+                request.Referer = referer;
+            }
 
             request.Method = "POST";
 
@@ -263,22 +270,61 @@ namespace PcoWeb
             requestStream.Write(data, 0, data.Length);
             requestStream.Close();
 
-            var response = request.GetResponse();
-
-            using (var stream = response.GetResponseStream())
+            try
             {
-                using (var ms = new MemoryStream())
-                {
-                    stream.CopyTo(ms);
+                var response = request.GetResponse();
 
-                    return ms.ToArray();
+                using (var stream = response.GetResponseStream())
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        stream.CopyTo(ms);
+
+                        return ms.ToArray();
+                    }
                 }
+            }
+            catch (WebException exception)
+            {
+                return this.GetByte(exception.Response.ResponseUri.AbsoluteUri, referer);
+            }
+        }
+
+        private byte[] GetByte(string url, string referer = null)
+        {
+            var request = HttpWebRequest.CreateHttp(url);
+            this.ConfigureRequest(request);
+
+            if (!string.IsNullOrEmpty(referer))
+            {
+                request.Referer = referer;
+            }
+
+            request.Method = "GET";
+
+            try
+            {
+                var response = request.GetResponse();
+
+                using (var stream = response.GetResponseStream())
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        stream.CopyTo(ms);
+
+                        return ms.ToArray();
+                    }
+                }
+            }
+            catch (WebException exception)
+            {
+                throw;
             }
         }
 
         private void ConfigureRequest(HttpWebRequest request)
         {
-            request.UserAgent = string.Format("Mozilla/5.0 (Windows NT 6.1; rv:27.0) Gecko/20100101 Firefox/27.0");
+            request.UserAgent = string.Format("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36");
             request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
             request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
             request.Headers[HttpRequestHeader.AcceptLanguage] = "de-de,de;q=0.8,en-us;q=0.5,en;q=0.3";
