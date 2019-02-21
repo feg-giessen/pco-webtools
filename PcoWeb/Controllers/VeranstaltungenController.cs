@@ -143,20 +143,24 @@ namespace PcoWeb.Controllers
             {
                 web.Login();
 
-                return this.PdfUpload(id, web);
+                return this.PdfUpload(id, web, null);
             }
         }
 
-        public ActionResult PdfUpload(int id, PcoWebClient web)
+        public ActionResult PdfUpload(int id, PcoWebClient web, TimeSpan? maxFuture)
         {
             string key = ConfigurationManager.AppSettings["FilePostKey"];
             string url = ConfigurationManager.AppSettings["FileProgramPostUrl"];
 
             var plan = web.GetPlan(id);
+            DateTime planDate = plan.ServiceTimes.Select(t => ViewHelpers.ConvertToTimeZone(DateTime.Parse(t.StartsAt).ToUniversalTime())).FirstOrDefault();
+
+            if (maxFuture.HasValue && (DateTime.UtcNow + maxFuture.Value) < planDate)
+                return null;
 
             string name = plan.ServiceType.Name.Split(' ').First()
                 + "_"
-                + plan.ServiceTimes.Select(t => ViewHelpers.ConvertToTimeZone(DateTime.Parse(t.StartsAt).ToUniversalTime()).ToString("yyyyMMdd_HHmm")).FirstOrDefault();
+                + planDate.ToString("yyyyMMdd_HHmm");
 
             byte[] data = web.Print(id);
 
@@ -209,7 +213,7 @@ namespace PcoWeb.Controllers
 
                 var org = web.GetOrganisation();
 
-                IEnumerable<string> serviceTypes = ConfigurationManager.AppSettings["FilePostServiceTypes"].Split(',');
+                IEnumerable<string> serviceTypes = ConfigurationManager.AppSettings["FileProgramPostServiceTypes"].Split(',');
 
                 var plans = new List<int>();
 
@@ -222,7 +226,7 @@ namespace PcoWeb.Controllers
 
                 foreach (var planId in plans)
                 {
-                    this.PdfUpload(planId, web);
+                    this.PdfUpload(planId, web, TimeSpan.FromDays(3));
                 }
             }
 
