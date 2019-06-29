@@ -67,11 +67,11 @@ namespace PcoWeb
                 }
             }
 
-            values.Add("email", ConfigurationManager.AppSettings["WebApiEmail"]);
+            values.Add("login", ConfigurationManager.AppSettings["WebApiEmail"]);
             values.Add("password", ConfigurationManager.AppSettings["WebApiPassword"]);
-            values.Add("Submit", "Go");
+            values.Add("commit", "Log In");
 
-            this.Post("https://accounts.planningcenteronline.com/login", values);
+            this.Post("https://login.planningcenteronline.com/login", values);
 
             this.login = true;
         }
@@ -324,10 +324,10 @@ namespace PcoWeb
 
         private void ConfigureRequest(HttpWebRequest request)
         {
-            request.UserAgent = string.Format("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36");
-            request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+            request.UserAgent = string.Format("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36");
+            request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3";
             request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-            request.Headers[HttpRequestHeader.AcceptLanguage] = "de-de,de;q=0.8,en-us;q=0.5,en;q=0.3";
+            request.Headers[HttpRequestHeader.AcceptLanguage] = "de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7";
             request.KeepAlive = true;
 
             request.CookieContainer = this.cookies;
