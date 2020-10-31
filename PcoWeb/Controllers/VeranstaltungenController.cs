@@ -200,6 +200,7 @@ namespace PcoWeb.Controllers
             return this.Content(string.Empty);
         }
 
+        [AllowAnonymous]
         public ActionResult UploadPdfs()
         {
             string key = ConfigurationManager.AppSettings["FilePostKey"];

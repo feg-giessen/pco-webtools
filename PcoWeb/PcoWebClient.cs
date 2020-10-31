@@ -37,6 +37,7 @@ namespace PcoWeb
         public PcoWebClient()
         {
             this.cookies = new CookieContainer();
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
         }
 
         public static bool IsAvailable(Organization organisation)
@@ -49,7 +50,7 @@ namespace PcoWeb
 
         public void Login()
         {
-            string content = this.Get(@"https://accounts.planningcenteronline.com/");
+            string content = this.Get(@"https://login.planningcenteronline.com/login/new");
 
             var hiddenInput = new Regex(@"\<input[^\>]+type\=" + "\"hidden\"" + @"[^\>]*\>", RegexOptions.IgnoreCase);
             var nameAttr = new Regex(@"name\=" + "\"(?<value>[^\"]*)\"", RegexOptions.IgnoreCase);
@@ -220,9 +221,9 @@ namespace PcoWeb
             this.ConfigureRequest(request);
 
             request.Method = "POST";
-            
+
             string postData = string.Join(
-                "&", 
+                "&",
                 values.Select(kv => string.Format("{0}={1}", HttpUtility.UrlEncode(kv.Key), HttpUtility.UrlEncode(kv.Value))));
 
             byte[] data = Encoding.ASCII.GetBytes(postData);
@@ -324,10 +325,10 @@ namespace PcoWeb
 
         private void ConfigureRequest(HttpWebRequest request)
         {
-            request.UserAgent = string.Format("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36");
-            request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3";
+            request.UserAgent = string.Format("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36");
+            request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9";
             request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-            request.Headers[HttpRequestHeader.AcceptLanguage] = "de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7";
+            request.Headers[HttpRequestHeader.AcceptLanguage] = "de,en-US;q=0.9,en;q=0.8";
             request.KeepAlive = true;
 
             request.CookieContainer = this.cookies;
